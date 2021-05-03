@@ -1,0 +1,113 @@
+
+/*.card-columns{*/
+/*    padding-left: 1rem;*/
+/*    padding-right: 1rem;*/
+/*    !*overflow-x: scroll;*!*/
+/*    overflow-y: scroll;*/
+/*    height: 500px;*/
+/*    width: 100vh;*/
+/*}*/
+
+/*@media (max-width: 575.98px) {*/
+/*    .card-columns {*/
+/*        column-count: 1;*/
+/*    }*/
+/*}*/
+/*@media (min-width: 576px) and (max-width: 767.98px) {*/
+/*    .card-columns {*/
+/*        column-count: 2;*/
+/*    }*/
+/*}*/
+/*@media (min-width: 768px){*/
+/*    .card-columns {*/
+/*        column-count: 4;*/
+/*    }*/
+/*}*/
+
+/*.movieGrid{*/
+/*    !*width: calc(100% - 200px);*!*/
+/*    text-align: -webkit-center;*/
+/*    height: calc(100% - 25px) ;*/
+/*    margin-top: 15px;*/
+/*    padding: 15px;*/
+/*    !*height: 100%;*!*/
+/*    width:  calc(100%);*/
+/*    !*margin: 15px;*!*/
+/*    !*height: 500px;*!*/
+/*    overflow-y: auto;*/
+/*    overflow-x: hidden;*/
+/*}*/
+
+.movieListArea {
+    margin-top: 10px;
+    height: calc(100% - 39.6px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: -webkit-center;
+    padding: 15px;
+/*    display: flex;
+    justify-content: center;
+    align-items: center;*/
+}
+.movieList{
+    margin: auto;
+    columns: 2; /*:3;*/
+    column-gap: 20px;
+}
+
+@media (max-width: 808px /*1100px*/) {
+    .movieList {
+        columns: 1; /*:2;*/
+    }
+}
+
+@media (max-width: 700px) {
+    .movieList{
+        columns: 1;
+    }
+}
+
+.showMore{
+    border: 1px solid #b8b8b8;
+    min-width: 200px;
+    max-height: 450px;
+    min-height: 188.8px;
+    margin: 0 0 20px 0;
+    display: flex;
+    /*padding: 10px;*/
+    background: #fff;
+    break-inside: avoid;
+    width: calc(100% - 10px);
+    transition: 0.3s;
+    overflow:hidden;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #6c757d;
+    justify-content: center;
+}
+
+.showMore:hover{
+    background-color: lightslategray;
+}
+
+.title{
+
+    text-shadow: 0px 0px 10px black;
+    background-color: #fff;
+    color: white;
+    font-size: 40px;
+    margin: auto;
+    display: flex;
+    vertical-align: middle;
+    background: transparent;
+}
+
+.showMore:hover{
+    transition: 0.3s;
+    background-color: #6A696C;
+    border: 1px solid black;
+}
+
+.showMore div{
+    margin: auto;
+}

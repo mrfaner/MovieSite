@@ -1,0 +1,92 @@
+/*.card{*/
+/*    !*min-width: 200px;*!*/
+/*    !*max-width: 300px;*!*/
+/*    text-align: left;*/
+/*    height: 280px;*/
+/*    !*width: 500px;*!*/
+/*    max-width: calc(100% / 1.10);*/
+/*    border: 1px solid rgba(0, 0, 0, 0.300);*/
+/*    overflow: auto;*/
+/*    transition: 0.2s;*/
+/*}*/
+
+/*@media (max-width: 1050px) {*/
+/*    .card{*/
+/*        height: 300px;*/
+/*    }*/
+/*}*/
+
+/*.card{*/
+/*    border: 1px solid black;*/
+/*}*/
+
+.box{
+    break-inside: avoid;
+    border: 1px solid #b8b8b8;
+    min-width: 200px;
+    max-height: 450px;
+    
+    margin: 0 0 20px 0;
+    /*padding: 10px;*/
+    background: #fff;
+    break-inside: avoid;
+    width: calc(100% - 10px);
+    transition: 0.3s;
+    overflow:hidden;
+    border-radius: 10px;
+}
+
+.box:hover{
+    transition: 0.3s;
+    border: 1px solid black;
+}
+
+.box div{
+    margin: auto;
+}
+
+.cardTitle{
+    font-size: 22px;
+    /*white-space: nowrap;*/
+}
+
+.cardText {
+    position: relative;
+    top: 12px;
+    height: 100px;
+    -webkit-user-select: none;
+    transition: 0.3s;
+    opacity: 0;
+    overflow: hidden;
+    width: calc(100% - 30px);
+}
+.box:hover .cardText {
+    position: inherit;
+    transition: 0.3s;
+    top: 0;
+    opacity: 1;
+    height: 100px;
+    -webkit-user-select: text;
+    animation: 0.4s ease-in hiddenToVisible;
+    overflow: visible;
+    width: calc(100% - 10px);
+}
+    .cardText > * {
+        position: relative;
+        overflow: hidden;
+        width: calc(100% - 10px);
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        -ms-text-overflow: ellipsis;
+        height: 100px;
+    }
+
+
+@keyframes hiddenToVisible {
+    0%{
+        -webkit-user-select: none;
+    }
+    100%{
+        -webkit-user-select: text;
+    }
+}

@@ -1,26 +1,86 @@
-import React, { Component } from 'react';
+import React, { useCallback, useEffect, useState } from "react";
+import MovieCardList from "./MovieCard/MovieCardList";
+import "./Home.css";
+import { Spinner } from "reactstrap";
+//import SearchBar from "./SearchBar/SearchBar";
 
-export class Home extends Component {
-  static displayName = Home.name;
 
-  render () {
+// const useFormField = (initialValue= '') => {
+//     const [value, setValue] = React.useState(initialValue);
+//     const onChange = React.useCallback((e) => setValue(e.target.value), []);
+//     return { value, onChange };
+// };
+
+
+export function Home() {
+
+    const [input, setInput] = useState('');
+
+    const [movieList, setMovieList] = useState();
+
+    const getMovies = useCallback(() => {
+        let xhr = new XMLHttpRequest();
+        let string;
+        if (movieList && movieList?.length !== 0) {
+            string = "api/movies/0," + (parseInt(movieList.length, 10) + 10);
+
+        } else {
+            string = "api/movies/0,11";
+        }
+        xhr.open("get", string, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                setMovieList(JSON.parse(xhr.responseText));
+            }
+        };
+        xhr.send();
+        console.log(xhr);
+    }, [movieList])
+
+    useEffect(() => {
+        if (!movieList) getMovies();
+    }, [movieList, getMovies])
+
+    const updateInput = async (input) => {
+        if (input !== "") {
+            let xhr = new XMLHttpRequest();
+            xhr.open("get", "api/movies/GetMoviesByTitle/" + input, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    setMovieList(JSON.parse(xhr.responseText));
+                }
+            };
+            xhr.send();
+
+            console.log(xhr);
+        }
+        else {
+            getMovies();
+        }
+        setInput(input);
+    }
+
     return (
-      <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-      </div>
+        <div className="Home">
+            {/*<SearchBar
+                keyword={input}
+                setKeyword={updateInput}
+            />*/}
+            {
+                movieList
+                    ? (<div className="movieListArea">
+                        <MovieCardList MovieList={movieList}
+                            getMovies={getMovies}
+                        />
+                    </div>)
+                    : (<Spinner />)
+            }
+
+        </div>
+
+
     );
-  }
 }
