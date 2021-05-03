@@ -2,6 +2,8 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
 namespace MovieSite.Services
 {
@@ -13,24 +15,36 @@ namespace MovieSite.Services
             Comments = DataBaseService.GetMongoCollection<Comment>("Comments");
         }
 
-        public async Task Create(Comment comment)
+        public async Task<Comment> Create(Comment comment)
         {
-            await Comments.InsertOneAsync(comment);
+            comment.CommentId = Guid.NewGuid().ToString();
+
+            Comment findMatch = await Comments.Find(x => x.CommentId == comment.CommentId).FirstOrDefaultAsync();
+
+            if (findMatch == null)
+            {
+                await Comments.InsertOneAsync(comment);
+                return comment;
+            }
+
+            return new Comment();
         }
 
-        public async Task<Comment> GetComment(string id)
+        public async Task<List<Comment>> GetComments(List<MovieComment> movieComments)
         {
-            return await Comments.Find(new BsonDocument("_id", new ObjectId(id))).FirstOrDefaultAsync();
-        }
+            List<Comment> comments = new List<Comment>();
 
-        public async Task AddComment(Comment comment)
-        {
-            await Comments.InsertOneAsync(comment);
-        }
+            foreach (var item in movieComments)
+            {
+                Comment findMatch = await Comments.Find(x => x.CommentId == item.CommentId).FirstOrDefaultAsync();
 
-        public async Task DeleteComment(string id)
-        {
-            await Comments.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
+                if (findMatch != null)
+                {
+                    comments.Add(findMatch);
+                }
+            }
+
+            return comments;
         }
     }
 }

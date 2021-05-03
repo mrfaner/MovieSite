@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace MovieSite.Services
 {
-    public class ArticleService
+    public class MovieService
     {
         private readonly IMongoCollection<Movie> Movies;
-        public ArticleService()
+        public MovieService()
         {
             Movies = DataBaseService.GetMongoCollection<Movie>("Movie");
         }

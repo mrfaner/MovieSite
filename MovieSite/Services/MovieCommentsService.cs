@@ -1,6 +1,7 @@
 ﻿using MovieSite.Models;
-using MongoDB.Bson;
 using MongoDB.Driver;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
@@ -15,30 +16,26 @@ namespace MovieSite.Services
             MovieComments = DataBaseService.GetMongoCollection<MovieComment>("MovieComments");
         }
 
-        public async Task Create(MovieComment movieComment)
+        public async Task<MovieComment> CreateMovieComment(string movieId, Comment comment)
         {
+            MovieComment movieComment = new MovieComment();
+            movieComment.MovieId = movieId;
+            movieComment.CommentId = comment.CommentId;
             await MovieComments.InsertOneAsync(movieComment);
+
+            return movieComment;
         }
 
-        public async Task<MovieComment> GetMovieComment(string id)
+        public async Task<List<MovieComment>> GetMovieComments(string movieId)
         {
-            return await MovieComments.Find(new BsonDocument("_id", new ObjectId(id))).FirstOrDefaultAsync();
-        }
+            List<MovieComment> movieComments = await MovieComments.Find(x => x.MovieId == movieId).ToListAsync();
 
-        public async Task AddMovieComment(MovieComment movieComment)
-        {
-            await MovieComments.InsertOneAsync(movieComment);
-        }
+            if (movieComments != null)
+            {
+                return movieComments;
+            }
 
-        public async Task UpdateMovieComments(MovieComment movieComment)
-        {
-            await MovieComments.ReplaceOneAsync(new BsonDocument("_id", new ObjectId(movieComment.MovieId)), movieComment);
+            return new List<MovieComment>();
         }
-
-        public async Task DeleteMovieComments(string id)
-        {
-            await MovieComments.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
-        }
-
     }
 }
