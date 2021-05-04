@@ -1,0 +1,48 @@
+
+.AuthenticationForm{
+    width: max-content;
+    height: max-content;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    vertical-align: center;
+    margin-top: auto;
+}
+
+button.nonActive, button.active{
+    border: 1px gray groove;
+    border-radius: 5px;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+    height: 100%;
+    width: 45%;
+    transition-duration: 0.4s;
+}
+
+button.active{
+    background: forestgreen;
+    color: white;
+}
+
+
+button.nonActive:hover, button.active:hover{
+    transform: scale(1.1);
+}
+
+.notSetValue{
+    color: white;
+    background: indianred;
+}
+
+.formPicker {
+    height: 35px;
+}
+
+.AuthenticationForm form{
+    margin-top: 10px;
+}
+
+.AuthenticationForm p{
+    margin-bottom: 10px;
+}

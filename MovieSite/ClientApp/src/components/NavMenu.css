@@ -1,18 +1,53 @@
-﻿a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿
+img.LogoItemIcon {
+    height: 4rem;
+    width: 166px;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    top: -5px;
+    position: relative;
 }
 
-html {
-  font-size: 14px;
+.SearchBar {
+    font-size: 20px;
+    width: 250px;
+    height: 3rem;
+    top: 5px;
+    position:relative;
 }
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.Search{
+    margin-left:auto;
+    display:block;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+
+img.SearchItemIcon {
+    height: 3.5rem;
+    width: 3.5rem;
+    position: relative;
+    cursor: pointer;
+}
+
+
+img.menuItemIcon {
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    float: right;
+    object-fit: contain;
+}
+
+header{
+    width: calc(100% - 200px);
+    margin: auto;
+    border-bottom: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-radius: 0px 0px 10px 10px;
+}
+
+@media (max-width:1000px) {
+    header{
+        width: 100%;
+    }
 }

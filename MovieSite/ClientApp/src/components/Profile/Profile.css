@@ -1,0 +1,30 @@
+﻿.heading {
+    width: max-content;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.profile-box {
+    overflow-y: auto;
+    border: 1px solid #b8b8b8;
+    min-width: 200px;
+    margin: 0 0 20px 0;
+    background: #fff;
+    break-inside: avoid;
+    width: calc(100% - 10px);
+    transition: 0.3s;
+    overflow-x: hidden;
+    border-radius: 10px;
+    height:100%
+}
+.avatar {
+    max-height: 300px;
+    max-width: 300px;
+    border: 1px solid #bdbdbd;
+}
+.your-articles {
+    font-size: 25px;
+    text-align:center;
+    font-weight:bold;
+}
+

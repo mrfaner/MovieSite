@@ -1,14 +1,58 @@
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+/*!* Provide sufficient contrast against white background *!*/
+/*html,body{*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*}*/
+
+
+/*!*div .page {*!*/
+/*!*vertical-align: middle;*!*/
+/*!*}*!*/
+
+/*#root, .page{*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+/*  min-width: 200px;*/
+/*}*/
+/*!*.page{*!*/
+/*!*  display: flex;*!*/
+/*!*  flex-direction: column;*!*/
+/*!*}*!*/
+/*!*header{*!*/
+/*!*  width: 100%;*!*/
+/*!*}*!*/
+/*.main{*/
+/*  height: calc(100% - 84px);*/
+/*}*/
+
+/*a {*/
+/*  color: #0366d6;*/
+/*}*/
+
+/*code {*/
+/*  color: #E01A76;*/
+/*}*/
+
+/*.btn-primary {*/
+/*  color: #fff;*/
+/*  background-color: #1b6ec2;*/
+/*  border-color: #1861ac;*/
+/*}*/
+
+html, body, #root, .page{
+  height: 100%;
+  width: 100%;
 }
 
-code {
-  color: #E01A76;
+@media (max-width: 188px) {
+  .main{
+    height: calc(100% - 57px);
+  }
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.main{
+  padding: 10px;
+  height: calc(100% - 95px);
+  width: 100%;
+  overflow: hidden;
 }

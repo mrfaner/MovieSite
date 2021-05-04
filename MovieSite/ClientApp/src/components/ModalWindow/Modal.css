@@ -1,0 +1,47 @@
+.modal {
+    /*height: 100vh;*/
+    /*width: 100vw;*/
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+
+.modal-body {
+    animation: 0.2s ease-out scaleFromCenter;
+    /*border: 1px gray groove;*/
+    flex-grow: 0;
+    padding: 2rem;
+    border-radius: 5px;
+    background: #fff;
+    margin: auto;
+}
+
+/*.modal-body.close{*/
+/*    animation: 0.2s ease-out scaleToCenter;*/
+/*}*/
+
+/*@keyframes scaleToCenter{*/
+/*    0%{*/
+/*        transform: scale(1);*/
+/*    }*/
+/*    100%{*/
+/*        transform: scale(0.5);*/
+/*    }*/
+/*}*/
+
+@keyframes scaleFromCenter {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+

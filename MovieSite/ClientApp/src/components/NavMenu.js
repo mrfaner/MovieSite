@@ -1,49 +1,94 @@
-import React, { Component } from 'react';
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+
+import React from 'react';
+import { Navbar, NavbarBrand, NavItem } from 'reactstrap';
+import {Link} from 'react-router-dom';
+import UserIcon from "./Images/user.png"
+// import SearchIcon from "./Images/SearchLogo.png"
 import './NavMenu.css';
+import {ModalWindow} from "./ModalWindow/ModalWindow";
+import {AuthenticationPage} from "./AuthenticationPage/AuthenticationPage";
+import {MainPopUpMenu} from "./MainPopUpMenu/MainPopUpMenu";
 
-export class NavMenu extends Component {
-  static displayName = NavMenu.name;
+export function NavMenu() {
 
-  constructor (props) {
-    super(props);
+  const [isLoggedIn] = React.useState(
+      Boolean(localStorage.getItem("User"))
+  );
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
-  }
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-  render () {
-    return (
-      <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
-          <Container>
-            <NavbarBrand tag={Link} to="/">MovieSite</NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-                </NavItem>
-              </ul>
-            </Collapse>
-          </Container>
-        </Navbar>
-      </header>
-    );
-  }
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const [isActive, setIsActive] = React.useState(false);
+
+return (
+  <header>
+    <Navbar className="he" light>
+    {/*<Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>*/}
+    {/*  <Container>*/}
+          {/*<NavbarBrand tag={Link} to="/">BooMBooK</NavbarBrand>*/}
+          <NavbarBrand tag={Link} to="/">
+              <div className="funcybtn">
+                MovieSite
+              </div>
+
+          </NavbarBrand>
+
+        {/*<NavbarToggler onClick={toggleNavbar} className="mr-2"/>*/}
+        {/*<Collapse className="d-sm-inline-flex flex-sm-row-reverse"*/}
+          {/*          isOpen={!isCollapsed} navbar>*/}
+          <ul className="navbar-nav flex-grow">
+            {
+              !isLoggedIn &&
+              (
+                  <NavItem onClick={ ()=> setIsActive(true) }>
+                      <img src={UserIcon}
+                           className="menuItemIcon center"
+                           alt="UserIcon"/>
+                    <ModalWindow active = {isActive}
+                                 setActive={setIsActive}>
+                      <AuthenticationPage/>
+                    </ModalWindow>
+                  </NavItem>
+              )
+            }
+            {
+              isLoggedIn &&
+              (
+                  <NavItem>
+                    <div>
+                      <img aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}
+                           src={UserIcon}
+                           className="menuItemIcon center"
+                           alt="UserIcon"/>
+                           <MainPopUpMenu anchorEl={anchorEl}
+                                          handleClose={handleClose}/>
+                      {/*<Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>*/}
+                      {/*  Open Menu*/}
+                      {/*</Button>*/}
+                      {/*<Menu id="simple-menu"*/}
+                      {/*    anchorEl={anchorEl}*/}
+                      {/*    keepMounted*/}
+                      {/*    open={Boolean(anchorEl)}*/}
+                      {/*    onClose={handleClose} >*/}
+                      {/*  <MenuItem onClick={handleClose}>Profile</MenuItem>*/}
+                      {/*  <MenuItem onClick={handleClose}>My account</MenuItem>*/}
+                      {/*  <MenuItem onClick={handleClose}>Logout</MenuItem>*/}
+                      {/*</Menu>*/}
+                    </div>
+                  </NavItem>
+              )
+            }
+          </ul>
+        {/*</Collapse>*/}
+      {/*</Container>*/}
+    </Navbar>
+  </header>
+);
+
 }
