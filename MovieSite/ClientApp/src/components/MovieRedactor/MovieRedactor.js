@@ -33,6 +33,7 @@ export function MovieRedactor() {
     const movieDurationField = useFormField("");
     const movieRatingField = useFormField("");
     const movieDescriptionField = useFormField("");
+    const movielinkField = useFormField("");
     const [errorList, setErrorList] = React.useState({});
     
 
@@ -102,18 +103,18 @@ export function MovieRedactor() {
             let movie = JSON.stringify({
                 MovieId: params,
                 Name: movieTitleField.get(),
+                Description: movieDescriptionField.get(),
                 Year: movieYearField.get(),
                 Image: img,
                 Country: movieCountryField.get(),
                 Duration: movieDurationField.get(),
-                IMDBRating: movieRatingField.get()
+                IMDBRating: movieRatingField.get(),
+                TrailerLink: movielinkField.get().substr(movielinkField.get().length - 11,11)
             });
-            console.log(movie);
             xhr.open("post","api/movies", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(movie);
-            console.log(xhr);
-        
+            console.log(movie);
         }
     }
     
@@ -131,38 +132,43 @@ export function MovieRedactor() {
                     />
                 </span>
                 <span className="titleSet">
-                    <label className="titleLabel">Title:</label>
+                    <label className="nameLabel">Title*:</label>
                     <input type="text"
                            {...movieTitleField.bind}>
                            </input>
                            {errorList["Title"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
                 </span>
                 <span className="year">
-                    <label>Date:</label>
+                    <label className="yearLabel">Date*:</label>
                     <input type="text"
                            {...movieYearField.bind}/>
                     {errorList["Year"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
                 </span>
                 <span className="country">
-                    <label>Country:</label>
+                    <label className="countryLabel">Country*:</label>
                     <input type="text"
                            {...movieCountryField.bind}/>
                             {errorList["Country"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
                 </span>
                 <span className="duration">
-                    <label>Duration:</label>
+                    <label className="durationlabel">Duration*:</label>
                     <input type="text"
                            {...movieDurationField.bind}/>
                            {errorList["Duration"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
                 </span>
                 <span className="rating">
-                    <label>IMDB Rating:</label>
+                    <label className="ratingLabel">IMDB Rating*:</label>
                     <input type="text"
                            {...movieRatingField.bind}/>
                            {errorList["Rating"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
                 </span>
+                <span className="link">
+                    <label className="linkLabel">Youtube link:</label>
+                        <input type="text"
+                                {...movielinkField.bind}/>
+                </span>
                 <span className="description">
-                    <label style={{width:"inherit"}}>Description:</label>
+                    <label className="descriptionLabel">Description*:</label>
                         <textarea type={"textbox"}
                                 {...movieDescriptionField.bind}/>
                                 {errorList["Description"] ? <div className="emptyErrorTitle">Field is empty</div>: null}

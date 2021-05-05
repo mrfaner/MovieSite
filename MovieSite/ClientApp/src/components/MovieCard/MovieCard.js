@@ -8,13 +8,17 @@ import { useHistory } from "react-router-dom";
      console.log(props.movie);
      const history = useHistory();
 
+     
      return(
-         <div className="box text-center">
-             <div className="cardTitle">{props.movie.title}</div>
-             <div className="cardText">{props.movie.description}</div>
-             <p>
-                <Button onClick={() => { history.push(`/MoviePage/${props.movie.movieId}`);}}>Читати...</Button>
-             </p>
+         <div className="view">
+            <img className="img" src={ props.movie.image }/>
+                <div className="mask">
+                <h2>{props.movie.name}</h2>
+                <p className="cardText">{props.movie.description}</p>
+                    <a>
+                        <Button onClick={() => { history.push(`/MoviePage/${props.movie.movieId}`);}}>Читати...</Button>
+                    </a>
+             </div>
          </div>
          // <Card className="movieBody">
          //     <CardTitle>

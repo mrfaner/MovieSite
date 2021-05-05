@@ -30,11 +30,11 @@
 span{
     margin: 5px;
 }
-label{
+.nameLabel,.yearLabel,.countryLabel,.durationlabel,.ratingLabel,.descriptionLabel,.linkLabel{
     min-width: 100px;
 }
 
-.year,.country,.duration,.rating{
+.year,.country,.duration,.rating,.link{
     display: flex;
 }
 
@@ -64,8 +64,6 @@ textarea{
     float: left;
 }
 
-
-
 .imageblock{
     position: relative;
     display: block;
@@ -73,7 +71,7 @@ textarea{
     height: 300px;
     border:1px black solid;
     border-radius: 5px;
-    object-fit: contain;
+    object-fit: fill;
     margin: 10px 10px 10px 0px;
 }
 
@@ -122,7 +120,7 @@ textarea{
     .imageInput{
         width: 130px;
     }
-    .year,.country,.duration,.rating,.titleSet{
+    .year,.country,.duration,.rating,.titleSet,.link{
         margin: auto auto 10px auto;;
         display: table;
     }
@@ -154,7 +152,7 @@ textarea{
 }
 
 @media (max-width:312px) {
-    .year,.country,.duration,.rating,.titleSet,.description{
+    .year,.country,.duration,.rating,.titleSet,.description,.link{
         display: flex;
         flex-direction: column;
         width: 90%;
@@ -164,7 +162,7 @@ textarea{
         align-content: center;
         margin: auto;
     }
-    label{
+    .movie-redactor label{
         width: 100%;
         text-align: center;
     }

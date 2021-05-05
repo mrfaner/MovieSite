@@ -4,6 +4,7 @@ import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { Profile } from './components/Profile/Profile';
 import { MovieRedactor } from "./components/MovieRedactor/MovieRedactor"
+import { View } from "./components/View/View"
 import './custom.css'
 
 export default class App extends Component {
@@ -16,6 +17,7 @@ export default class App extends Component {
                     <Route exact path='/' component={Home} />
                     <Route exact path='/Profile/' component={Profile} />
                     <Route exact path='/Redactor/:id' component={MovieRedactor}/>
+                    <Route exact path='/MoviePage/:id' component={View}/>
                 </Layout>
             </div>
         );

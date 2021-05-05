@@ -5,9 +5,12 @@
 /*    !*width: calc(100% - 16px);*!*/
 /*}*/
 
+
+
+
 .container{
     display: block;
-    height: calc(100% - 67px);
+    height: calc(100% - 77px);
     width: calc(100% - 200px);
     margin: 0 auto;
     max-width: none;
@@ -25,11 +28,16 @@
     width: 100%;
 }
 
-.articleListArea {
+.movieListArea {
     margin-top: 10px;
-    height: calc(100% - 90px);
+    height: calc(100%);
     overflow-y: auto;
     overflow-x: hidden;
     text-align: -webkit-center;
     padding: 15px;
+}
+.spinner{
+    margin: auto;
+    margin-top: 240px;
+    display: block;
 }

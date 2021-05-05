@@ -70,13 +70,14 @@ export function Home() {
                 setKeyword={updateInput}
             />*/}
             {
-                movieList
-                    ? (<div className="movieListArea">
-                        <MovieCardList MovieList={movieList}
-                            getMovies={getMovies}
-                        />
-                    </div>)
-                    : (<Spinner />)
+                 movieList
+                     ? (<div className="movieListArea">
+                         <MovieCardList MovieList={movieList}
+                             getMovies={getMovies}
+                         />
+                     </div>)
+                     : (<Spinner className="spinner"/>
+)
             }
 
         </div>
