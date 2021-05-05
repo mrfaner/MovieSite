@@ -3,6 +3,7 @@ import "./View.css"
 import {useParams} from "react-router-dom"
 import {Spinner} from "reactstrap"
 import YoutubeEmbed from "./../YoutubeEmbed/YoutubeEmbed";
+import noimage from "./../MovieRedactor/no-image.png";
 
 
 export function View()
@@ -36,7 +37,7 @@ export function View()
         {movie
             ? (
                     <div className="movie-view">
-                        <img className="imageView" src={movie.image} alt="Photo dont choose"/>
+                        <img className="imageView" src={(movie.image.includes("data:image")) ? movie.image : noimage} alt="Photo dont choose"/>
                         <label className="titleLabel">{movie.name}</label>
                         <div className="yearBlock">
                             <div className="yearField">Date: </div>

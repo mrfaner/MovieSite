@@ -2,6 +2,8 @@ import React from "react";
 import "./MovieCard.css";
 import { Button } from "reactstrap";
 import { useHistory } from "react-router-dom";
+import noimage from "./../MovieRedactor/no-image.png";
+
 
  function MovieCard(props){
 
@@ -11,7 +13,7 @@ import { useHistory } from "react-router-dom";
      
      return(
          <div className="view">
-            <img className="img" src={ props.movie.image }/>
+            <img className="img" src={ (props.movie.image.includes("data:image")) ? props.movie.image : noimage }/>
                 <div className="mask">
                 <h2>{props.movie.name}</h2>
                 <p className="cardText">{props.movie.description}</p>
