@@ -17,7 +17,7 @@ export function Profile() {
                 ? (
                     <div className="profile-box">
                         <div className ="heading">Profile</div>
-                        <img className="avatar" src={logo} alt="Logo" /><br />
+                        <img className="avatar" src={user.image? user.image : logo} alt="Logo" />
                         <div className="names">{user.firstName + ' ' + user.lastName}</div>
                         <button onClick={()=>{history.push("/Redactor/" + user.userId)}}>AddNews</button>
                     </div>

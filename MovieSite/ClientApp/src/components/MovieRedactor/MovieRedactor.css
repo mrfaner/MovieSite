@@ -11,7 +11,7 @@
     margin-top: 20px;
 }
 
-.movie-buttons > button {
+.movie-buttons>button {
     pointer-events: all;
     height: 48px;
     width: 100px;
@@ -22,60 +22,60 @@
 }
 
 @media (max-width:422px) {
-    .imageSelector{
+    .imageSelector {
         float: none;
     }
-    
 }
-span{
+
+span {
     margin: 5px;
 }
-.nameLabel,.yearLabel,.countryLabel,.durationlabel,.ratingLabel,.descriptionLabel,.linkLabel{
+
+.nameLabel, .yearLabel, .countryLabel, .durationlabel, .ratingLabel, .descriptionLabel, .linkLabel {
     min-width: 100px;
 }
 
-.year,.country,.duration,.rating,.link{
+.year, .country, .duration, .rating, .link {
     display: flex;
 }
 
-
-.titleSet{
+.titleSet {
     margin-top: 10px;
     display: flex;
 }
 
-.description{
+.description {
     float: none;
     width: calc(100% - 5px);
     display: block;
 }
-input[type='file'] {
+
+.movie-redactor input[type='file'] {
     display: block;
 }
 
-textarea{
+textarea {
     width: 100%;
     max-height: 300px;
     min-height: 100px;
-
 }
 
-.imageSelector{
+.imageSelector {
     float: left;
 }
 
-.imageblock{
+.imageblock {
     position: relative;
     display: block;
     width: 200px;
     height: 300px;
-    border:1px black solid;
+    border: 1px black solid;
     border-radius: 5px;
     object-fit: fill;
     margin: 10px 10px 10px 0px;
 }
 
-.imageInput{
+.imageInput {
     width: 132px;
     position: relative;
     display: flex;
@@ -83,48 +83,51 @@ textarea{
     overflow: hidden;
 }
 
-.emptyErrorTitle
-{
-    font-weight: bold;
+.emptyErrorTitle {
     display: block;
+    font-size: large;
     margin-left: 5px;
     position: relative;
     color: red;
+    font-weight: bold;
     z-index: 1;
-    width: 100%;
+    width: auto;
     height: 100%;
     white-space: nowrap;
 }
-.movie-submit{
+
+.movie-submit {
     transition: 0.2s;
 }
-.movie-submit:hover{
+
+.movie-submit:hover {
     background: lightgreen;
 }
 
-.titleSet{
+.titleSet {
     padding-top: 15px;
 }
 
 @media (max-width:645px) {
-    .imageSelector{
+    .imageSelector {
         float: none;
     }
-    .imageInput,.imageblock{
+    .imageInput, .imageblock {
         margin: auto;
         display: table;
     }
-    .imageblock{
+    .imageblock {
         margin: auto auto 10px auto;
     }
-    .imageInput{
+    .imageInput {
         width: 130px;
     }
-    .year,.country,.duration,.rating,.titleSet,.link{
-        margin: auto auto 10px auto;;
+    .year, .country, .duration, .rating, .titleSet, .link {
+        margin: auto auto 10px auto;
+        ;
         display: table;
     }
-    .description{
+    .description {
         display: flex;
         flex-direction: column;
         width: 90%;
@@ -134,12 +137,13 @@ textarea{
         align-content: center;
         margin: auto;
     }
-    .movie-redactor{
+    .movie-redactor {
         overflow: auto;
     }
 }
+
 @media (max-width:1000px) {
-    .description{
+    .description {
         display: flex;
         flex-direction: column;
         width: 90%;
@@ -152,7 +156,7 @@ textarea{
 }
 
 @media (max-width:312px) {
-    .year,.country,.duration,.rating,.titleSet,.description,.link{
+    .year, .country, .duration, .rating, .titleSet, .description, .link {
         display: flex;
         flex-direction: column;
         width: 90%;
@@ -162,7 +166,7 @@ textarea{
         align-content: center;
         margin: auto;
     }
-    .movie-redactor label{
+    .movie-redactor label {
         width: 100%;
         text-align: center;
     }

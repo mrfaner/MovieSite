@@ -40,6 +40,19 @@ namespace MovieSite.Controllers
         {
             return await userService.ChangeUserData(fieldName, userId, newData);
         }
+
+        [HttpPost("ChangeUserData/Image/")]
+        public async Task<User> ChangeUserDataImage(User user)
+        {
+            return await userService.ChangeUserDataImage(user);
+        }
+
+        [HttpPost("GetUserData/{userId}")]
+        public async Task<User> GetUserData(string userId)
+        {
+            return await userService.GetUserData(userId);
+        }
+
     }
 
 }

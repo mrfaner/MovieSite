@@ -43,6 +43,39 @@ namespace MovieSite.Services
             return foundUser[0];
         }
 
+        public async Task<User> GetUserData(string userId)
+        {
+            List<User> foundUser = await Users.Find(x => x.UserId == userId).ToListAsync();
+
+            if (foundUser.Count == 0)
+            {
+                return new User();
+            }
+
+            return foundUser[0];
+        }
+
+        public async Task<User> ChangeUserDataImage(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(x => x.UserId, user.UserId);
+
+            var update = Builders<User>.Update.Set(x => x.UserId, user.UserId);
+
+            update = update.Set(x => x.Image, user.Image);
+
+            await Users.UpdateOneAsync(filter, update);
+
+            List<User> foundUser = await Users.Find(x => x.UserId == user.UserId).ToListAsync();
+
+            if (foundUser.Count == 0)
+            {
+                return new User();
+            }
+
+            return foundUser[0];
+        }
+
+
         public async Task<User> ChangeUserData(string fieldName, string userId, string newData)
         {
             var filter = Builders<User>.Filter.Eq(x => x.UserId, userId);

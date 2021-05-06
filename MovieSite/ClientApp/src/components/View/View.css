@@ -1,8 +1,4 @@
-.movie-view{
-    margin-top: 20px;
-}
-
-.imageView{
+.imageView {
     height: 600px;
     width: 400px;
     border: 1px solid black;
@@ -10,28 +6,29 @@
     transition: 0.5s;
     float: left;
 }
-.imageView:hover{
-    transform: scale(1.1);
+
+.imageView:hover {
+    transform: scale(1.015);
 }
 
-label:not(.descriptionLabel,.titleLabel){
+label:not(.descriptionLabel, .titleLabel) {
     display: flex;
     font-size: 24px;
 }
 
-.descriptionField,.descriptionLabel,.trailerField{
+.descriptionField, .descriptionLabel, .trailerField {
     display: flex;
     width: 100%;
 }
 
-.movie-view label:not(.descriptionLabel){
+.movie-view label:not(.descriptionLabel) {
     font-weight: bolder;
     display: flex;
     align-items: center;
     font-size: 24px;
 }
 
-.titleLabel{
+.titleLabel {
     height: auto;
     display: flex;
     font-weight: bold;
@@ -42,41 +39,75 @@ label:not(.descriptionLabel,.titleLabel){
     text-transform: uppercase;
     white-space: pre-wrap;
     word-wrap: normal;
+    text-decoration: underline;
+    text-shadow: 2px 2px 3px rgba(112, 112, 112, 0.78);
 }
-.yearField,.countryField,.durationField,.ratingField{
+
+.yearField, .countryField, .durationField, .ratingField {
     display: flex;
     font-weight: bold;
     font-size: 24px;
     padding-left: 20px;
     white-space: nowrap;
     width: 175px;
+    text-decoration: underline;
+    text-shadow: 2px 2px 3px rgba(112, 112, 112, 0.78);
 }
 
-.yearBlock,.countryBlock,.durationBlock,.ratingBlock{
+.yearBlock, .countryBlock, .durationBlock, .ratingBlock {
     display: flex;
+    text-shadow: 2px 2px 3px rgba(112, 112, 112, 0.78);
 }
 
-.descriptionField,.trailerField{
+.descriptionField, .trailerField {
     font-size: 36px;
     font-weight: bold;
-}
-.descriptionLabel{
-    font-size: 24px;
-    text-align: justify;
+    text-shadow: 2px 2px 3px rgba(112, 112, 112, 0.78);
 }
 
-.movie-view{
+.descriptionLabel {
+    font-size: 24px;
+    text-align: justify;
+    text-shadow: 2px 2px 3px rgba(112, 112, 112, 0.78);
+}
+
+.movie-view {
     width: calc(100% - 10px);
 }
 
+.TrailerBlock {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 75%;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.trailerField {
+    width: 100%;
+    height: auto;
+}
+
+.TrailerBlock .video-responsive {
+    width: 100%;
+    height: auto;
+}
+
 @media (max-width:1000px) {
-    .movie-view{
+    .movie-view {
         padding: 15px;
+    }
+    .TrailerBlock {
+        width: 100%;
     }
 }
 
 @media (max-width:645px) {
-    .imageView{
+    .imageView {
         float: none;
         margin: auto;
         display: flex;
@@ -84,16 +115,15 @@ label:not(.descriptionLabel,.titleLabel){
 }
 
 @media (max-width:430px) {
-    .imageView{
+    .imageView {
         width: calc(100% - 10px);
         height: auto;
     }
 }
 
 @media (max-width:875) {
-    .player{
+    .player {
         width: calc(100% - 20px);
         height: auto;
-
     }
 }

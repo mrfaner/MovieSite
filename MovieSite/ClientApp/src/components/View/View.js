@@ -1,43 +1,41 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./View.css"
-import {useParams} from "react-router-dom"
-import {Spinner} from "reactstrap"
+import { useParams } from "react-router-dom"
+import { Spinner } from "reactstrap"
 import YoutubeEmbed from "./../YoutubeEmbed/YoutubeEmbed";
 import noimage from "./../MovieRedactor/no-image.png";
+import CommentBlock from "./../CommentBlock/CommentBlock";
 
 
-export function View()
-{
-    const [movie,setMovie] = useState();
+
+export function View() {
+    const [movie, setMovie] = useState();
     const params = useParams().id
 
 
     useEffect(() => {
-            if (!movie) {
-                let xhr = new XMLHttpRequest()
+        if (!movie) {
+            let xhr = new XMLHttpRequest()
 
-                xhr.open("get", "api/movies/GetMovieByMovieId/" + params, true)
-                xhr.setRequestHeader("Content-Type", "application/json")
+            xhr.open("get", "api/movies/GetMovieByMovieId/" + params, true)
+            xhr.setRequestHeader("Content-Type", "application/json")
 
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
-
-                        let movie = JSON.parse(xhr.responseText)
-
-                        setMovie(JSON.parse(xhr.responseText))
-                    }
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    setMovie(JSON.parse(xhr.responseText))
                 }
-                xhr.send()
             }
-        }, [movie, params])
+            xhr.send()
+        }
+    }, [movie, params])
 
-        console.log(movie);
-    return(
+    console.log(movie);
+    return (
         <>
-        {movie
-            ? (
+            {movie
+                ? (
                     <div className="movie-view">
-                        <img className="imageView" src={(movie.image.includes("data:image")) ? movie.image : noimage} alt="Photo dont choose"/>
+                        <img className="imageView" src={(movie.image.includes("data:image")) ? movie.image : noimage} alt="Photo dont choose" />
                         <label className="titleLabel">{movie.name}</label>
                         <div className="yearBlock">
                             <div className="yearField">Date: </div>
@@ -59,22 +57,23 @@ export function View()
                             <div className="descriptionField">Description:</div>
                             <label className="descriptionLabel">{movie.description}</label>
                         </div>
-                        {(movie.trailerLink !== null)?
-                        (
-                            <div className="TrailerBlock">
-                            <div className="trailerField">Trailer:</div>
-                            <YoutubeEmbed embedId={movie.trailerLink} />
-                        </div>
-                        ):(null)
-                        
+                        {(movie.trailerLink !== null) ?
+                            (
+                                <div className="TrailerBlock">
+                                    <div className="trailerField">Trailer:</div>
+                                    <YoutubeEmbed embedId={movie.trailerLink} />
+                                </div>
+                            )
+                            : (null)
                         }
+                        <CommentBlock movieId={movie.movieId} />
                     </div>
-            )
-            : (
-                <>
-                    <Spinner className="spinner"/>
-                </>
-            )}
-    </>
+                )
+                : (
+                    <>
+                        <Spinner className="spinner" />
+                    </>
+                )}
+        </>
     )
 }

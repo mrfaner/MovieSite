@@ -1,0 +1,27 @@
+.new-comment-container{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+
+.comment-add{
+    width: 3rem;
+    height: 3rem;
+    border: 1px grey solid;
+    border-radius: 50%;
+}
+
+.new-comment-container button:focus,.new-comment-container button:active {
+    outline: none;
+}
+
+.comment-input{
+    width: 50%;
+}
+
+.comment-rating{
+    display: flex;
+    position: relative;
+}

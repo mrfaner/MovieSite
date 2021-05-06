@@ -1,4 +1,17 @@
-﻿
+﻿.funcybtn {
+    font-size: 50px;
+    position: absolute;
+    margin-top: -40px;
+}
+
+@media (max-width: 310px) {
+    .funcybtn{
+        font-size: 25px;
+        position: relative;
+        margin: 0;
+    }
+}
+
 img.LogoItemIcon {
     height: 4rem;
     width: 166px;
@@ -13,13 +26,13 @@ img.LogoItemIcon {
     width: 250px;
     height: 3rem;
     top: 5px;
-    position:relative;
-}
-.Search{
-    margin-left:auto;
-    display:block;
+    position: relative;
 }
 
+.Search {
+    margin-left: auto;
+    display: block;
+}
 
 img.SearchItemIcon {
     height: 3.5rem;
@@ -28,16 +41,17 @@ img.SearchItemIcon {
     cursor: pointer;
 }
 
-
 img.menuItemIcon {
     cursor: pointer;
     height: 50px;
     width: 50px;
     float: right;
+    border: rgb(165, 165, 165) 2px solid;
+    border-radius: 100px;
     object-fit: contain;
 }
 
-header{
+header {
     width: calc(100% - 200px);
     margin: auto;
     border-bottom: 1px solid #000000;
@@ -47,7 +61,7 @@ header{
 }
 
 @media (max-width:1000px) {
-    header{
+    header {
         width: 100%;
     }
 }
