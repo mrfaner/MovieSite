@@ -1,25 +1,29 @@
-import React from "react"
+import React, {useState} from "react"
 import "./Comments.css"
 import Comment from "./Comment/Comment";
 
 
-function Comments({ comments }) {
-    console.log(comments)
+function Comments({comments, userId, updateList}) {
+
     return (
         <div className="comment-list">
+            <>
             {comments?.length > 0 && (
                 <>
                     {
                         comments?.map((comment, index) => {
                             return (
-                                <Comment key={index}
-                                    comment={comment} />
+                                <Comment userId = {userId}
+                                         key={index}
+                                         comment={comment}
+                                         updateList={updateList}
+                                />
                             )
-                        })
-                    }
+                        })}
                 </>
             )
             }
+            </>
         </div>
     )
 

@@ -34,9 +34,9 @@ export function Profile() {
             <div className ="heading">Profile</div>
             <img className="avatar" src={logo} alt="Logo" />
             <div className="names">{user.FirstName + ' ' + user.LastName}</div>
-            <div className="your-articles">Your article`s</div>
-            <div className="articleListArea">
-                <ArticleCardList ArticleList={articleList} />
+            <div className="your-movies">Your movie`s</div>
+            <div className="movieListArea">
+                <MovieCardList MovieList={movieList} />
             </div>
         </div>*/
     );

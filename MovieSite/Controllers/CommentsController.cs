@@ -15,5 +15,11 @@ namespace MovieSite.Controllers
         {
             this.commentService = commentService;
         }
+
+        [HttpPut("DeleteComment/{commentId}")]
+        public async Task DeleteComment(string commentId)
+        {
+            await commentService.DeleteComment(commentId);
+        }
     }
 }

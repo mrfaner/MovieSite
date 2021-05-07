@@ -11,6 +11,7 @@ import CommentBlock from "./../CommentBlock/CommentBlock";
 export function View() {
     const [movie, setMovie] = useState();
     const params = useParams().id
+    const [isChanged, setIsChanged] = useState(false)
 
 
     useEffect(() => {
@@ -66,7 +67,9 @@ export function View() {
                             )
                             : (null)
                         }
-                        <CommentBlock movieId={movie.movieId} />
+                        <div className="commentsBlock">
+                            <CommentBlock movieId={movie.movieId} isChanged={isChanged} setIsChanged={setIsChanged} />
+                        </div>
                     </div>
                 )
                 : (

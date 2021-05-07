@@ -30,6 +30,11 @@ namespace MovieSite.Services
             return new User();
         }
 
+        public async Task<User> GetUserById(string userId)
+        {
+            return await Users.Find(x => x.UserId == userId).FirstOrDefaultAsync();
+        }
+
         public async Task<User> LogIn(string login, string password)
         {
             List<User> foundUser = await Users.Find(x => x.Login == login &&

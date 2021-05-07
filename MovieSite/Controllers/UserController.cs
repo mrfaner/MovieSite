@@ -23,6 +23,12 @@ namespace MovieSite.Controllers
             return await userService.Create(user);
         }
 
+        [HttpGet("GetUserById/{userId}")]
+        public async Task<User> GetUserById(string userId)
+        {
+            return await userService.GetUserById(userId);
+        }
+
         [HttpGet("{login},{password}")]
         public async Task<User> GetUser(string login, string password)
         {
