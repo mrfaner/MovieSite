@@ -19,7 +19,7 @@ namespace MovieSite.Models
         public string Country { get; set; }
 
 
-        public string Categories { get; set; }
+        public string[] Categories { get; set; }
 
         public string Duration { get; set; }
 

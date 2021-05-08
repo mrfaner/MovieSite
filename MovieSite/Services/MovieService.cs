@@ -56,6 +56,33 @@ namespace MovieSite.Services
 
             return await Movies.Find(x => true).Skip(first).Limit(second - first).ToListAsync();
         }
+        public async Task<List<Movie>> GetMovies(string title, string category, string firstNumber, string secondNumber)
+        {
+            int first = Convert.ToInt32(firstNumber);
+            int second = Convert.ToInt32(secondNumber);
+            FilterDefinition<Movie> filter = null;
+            if (!title.Equals(""))
+            {
+                Regex regex = new Regex(@$"[\s\S]*{title}[\s\S]*", RegexOptions.IgnoreCase);
+                filter = Builders<Movie>.Filter.Regex(x => x.Name, new BsonRegularExpression(regex));
+                if (!category.Equals(""))
+                {
+                    filter &= Builders<Movie>.Filter.AnyEq(x => x.Categories, category);
+                }
+            }
+            else if (!category.Equals(""))
+            {
+                filter = Builders<Movie>.Filter.AnyEq(x => x.Categories, category);
+            }
+            try
+            {
+                return await Movies.Find(filter).Skip(first).Limit(second - first).ToListAsync();
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public async Task UpdateMovie(Movie movie)
         {

@@ -1,8 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./MovieRedactor.css";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import noimage from "./no-image.png";
 import imageToBase64 from 'image-to-base64/browser';
+import Select from '@material-ui/core/Select';
+import Input from '@material-ui/core/Input';
+import MenuItem from '@material-ui/core/MenuItem';
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItemText from '@material-ui/core/ListItemText';
+import InputLabel from '@material-ui/core/InputLabel';
+
 
 const useFormField = (initialValue) => {
     const [value, setValue] = React.useState(initialValue);
@@ -21,8 +28,55 @@ const useFormField = (initialValue) => {
     };
 };
 
-  
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
+
+const names = [
+    '3D',
+    'Action',
+    'Adventure',
+    'Animation',
+    'Anime',
+    'Biography',
+    'Comedy',
+    'Crime',
+    'Concert',
+    'Documentary',
+    'Drama',
+    'Family',
+    'Fantasy',
+    'Film-Noir',
+    'Game-Show',
+    'History',
+    'Horror',
+    'Kids',
+    'Music',
+    'Musical',
+    'Mystery',
+    'News',
+    'Reality-TV',
+    'Romance',
+    'Sci-Fi',
+    'Shortie',
+    'Sport',
+    'Talk-Show',
+    'Thriller',
+    'TV and DVD only',
+    'War',
+    'Western'
+];
+
+
 export function MovieRedactor() {
+    const [personName, setPersonName] = React.useState([]);
     const [redactor, setReadactor] = useState();
     const params = useParams().id;
     // console.log(params);
@@ -32,12 +86,16 @@ export function MovieRedactor() {
     const movieCountryField = useFormField("");
     const movieDurationField = useFormField("");
     const movieRatingField = useFormField("");
+    const cat = useFormField();
     const movieDescriptionField = useFormField("");
     const movielinkField = useFormField("");
     const [errorList, setErrorList] = React.useState({});
-    
+    let pers;
+    const handleChange = (event) => {
+        setPersonName(event.target.value);
+    };
 
-    function errorsValidator(){
+    function errorsValidator() {
         let errors = {};
 
         if (!movieTitleField.get().trim()) errors["Title"] = true;
@@ -64,15 +122,13 @@ export function MovieRedactor() {
     }
 
     useEffect(() => {
-        if (!redactor) 
-        {
+        if (!redactor) {
             setReadactor(document.getElementById("movie-dynamic-body"));
         }
     }, [redactor, setReadactor])
 
     useEffect(() => {
-        if (!image)
-        {
+        if (!image) {
             setImage(noimage);
         }
     }, [image])
@@ -81,23 +137,22 @@ export function MovieRedactor() {
         let err = errorsValidator();
 
         setErrorList(err);
-        if (Object.keys(err).length === 0){
+        if (Object.keys(err).length === 0) {
             let xhr = new XMLHttpRequest();
             let img;
-            if (image === "/static/media/no-image.9ae40db8.png")
-            {
+            if (image === "/static/media/no-image.9ae40db8.png") {
                 await imageToBase64("./no-image.png") // Path to the image
-                .then(
-                    (response) => {
-                        img = response; // "cGF0aC90by9maWxlLmpwZw==
-                    }
-                )
-                .catch(
-                    (error) => {
-                        console.log(error); // Logs an error if there was one
-                    }
-                )            
-            }else{
+                    .then(
+                        (response) => {
+                            img = response; // "cGF0aC90by9maWxlLmpwZw==
+                        }
+                    )
+                    .catch(
+                        (error) => {
+                            console.log(error); // Logs an error if there was one
+                        }
+                    )
+            } else {
                 img = image;
             }
             let movie = JSON.stringify({
@@ -106,80 +161,107 @@ export function MovieRedactor() {
                 Description: movieDescriptionField.get(),
                 Year: movieYearField.get(),
                 Image: img,
+                Categories: personName,
                 Country: movieCountryField.get(),
                 Duration: movieDurationField.get(),
                 IMDBRating: movieRatingField.get(),
-                TrailerLink: movielinkField.get().substr(movielinkField.get().length - 11,11)
+                TrailerLink: movielinkField.get().substr(movielinkField.get().length - 11, 11)
             });
-            xhr.open("post","api/movies", true);
+            xhr.open("post", "api/movies", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(movie);
             console.log(movie);
         }
     }
-    
 
     // console.log(image);
     // console.log(redactor);
     return (
         <div id="movie-redactor">
-            <div>
+            <div className="mainSetBlock">
                 <span className="imageSelector">
-                    <img className="imageblock" src={ image? image : noimage } alt="Photo dont choose"/>
+                    <img className="imageblock" src={image ? image : noimage} alt="Photo dont choose" />
                     <input className="imageInput"
                         type="file"
                         onChange={event => imageSelect(event)}
                     />
                 </span>
-                <span className="titleSet">
-                    <label className="nameLabel">Title*:</label>
-                    <input type="text"
-                           {...movieTitleField.bind}>
-                           </input>
-                           {errorList["Title"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
-                </span>
-                <span className="year">
-                    <label className="yearLabel">Date*:</label>
-                    <input type="text"
-                           {...movieYearField.bind}/>
-                    {errorList["Year"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
-                </span>
-                <span className="country">
-                    <label className="countryLabel">Country*:</label>
-                    <input type="text"
-                           {...movieCountryField.bind}/>
-                            {errorList["Country"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
-                </span>
-                <span className="duration">
-                    <label className="durationlabel">Duration*:</label>
-                    <input type="text"
-                           {...movieDurationField.bind}/>
-                           {errorList["Duration"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
-                </span>
-                <span className="rating">
-                    <label className="ratingLabel">IMDB Rating*:</label>
-                    <input type="text"
-                           {...movieRatingField.bind}/>
-                           {errorList["Rating"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
-                </span>
-                <span className="link">
-                    <label className="linkLabel">Youtube link:</label>
+                <div className="otherSetEditor">
+                    <span className="titleSet">
+                        <label className="nameLabelEditor">Title*:</label>
                         <input type="text"
-                                {...movielinkField.bind}/>
-                </span>
-                <span className="description">
-                    <label className="descriptionLabel">Description*:</label>
+                            {...movieTitleField.bind}>
+                        </input>
+                        {errorList["Title"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
+                    </span>
+                    <span className="year">
+                        <label className="yearLabelEditor">Date*:</label>
+                        <input type="text"
+                            {...movieYearField.bind} />
+                        {errorList["Year"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
+                    </span>
+                    <span className="country">
+                        <label className="countryLabelEditor">Country*:</label>
+                        <input type="text"
+                            {...movieCountryField.bind} />
+                        {errorList["Country"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
+                    </span>
+                    <span className="duration">
+                        <label className="durationlabelEditor">Duration*:</label>
+                        <input type="text"
+                            {...movieDurationField.bind} />
+                        {errorList["Duration"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
+                    </span>
+                    <span className="rating">
+                        <label className="ratingLabelEditor">IMDB Rating*:</label>
+                        <input type="text"
+                            {...movieRatingField.bind} />
+                        {errorList["Rating"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
+                    </span>
+                    <span className="link">
+                        <label className="linkLabelEditor">Youtube link:</label>
+                        <input type="text"
+                            {...movielinkField.bind} />
+                    </span>
+                    <div className="categoriesBox">
+                        <label classname="categoriesLabelEditor">
+                            Categories*:
+                        </label>
+                            <Select
+                                labelId="demo-mutiple-checkbox-label"
+                                id="demo-mutiple-checkbox"
+                                multiple
+                                value={personName}
+                                onChange={handleChange}
+                                input={<Input />}
+                                renderValue={(selected) => selected.join(', ')}
+                                MenuProps={MenuProps}
+
+                            >
+                                {names.map((name) => (
+                                    <MenuItem key={name} value={name}>
+                                        <Checkbox checked={personName.indexOf(name) > -1} />
+                                        <ListItemText primary={name} />
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                    </div>
+
+                    </div>
+
+                    <span className="description">
+                        <label className="descriptionLabel">Description*:</label>
                         <textarea type={"textbox"}
-                                {...movieDescriptionField.bind}/>
-                                {errorList["Description"] ? <div className="emptyErrorTitle">Field is empty</div>: null}
-                </span>
+                            {...movieDescriptionField.bind} />
+                        {errorList["Description"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
+                    </span>
+                </div>
+                <div className="movie-buttons">
+                    <button className="movie-submit" onClick={movieSubmitHandler}>Add movie</button>
+                </div>
+                <div id="movie-dynamic-body">
+                </div>
             </div>
-            <div className="movie-buttons">
-                <button className="movie-submit" onClick={movieSubmitHandler}>Add movie</button>
-            </div>
-            <div id="movie-dynamic-body">
-            </div>
-        </div>
     );
 
 }
