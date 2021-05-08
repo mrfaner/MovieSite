@@ -11,7 +11,6 @@
     transform: scale(1.015);
 }
 
-label:not(.descriptionLabel, .titleLabel) {}
 
 .ratingLabel {
     text-align: right;
@@ -22,7 +21,7 @@ label:not(.descriptionLabel, .titleLabel) {}
     width: 100%;
 }
 
-.movie-view label:not(.descriptionLabel, .ratingLabel) {
+.movie-view label:not(.descriptionLabel, .ratingLabel, .categoriesLabel) {
     font-weight: bolder;
     display: flex;
     align-items: center;
@@ -35,7 +34,7 @@ label:not(.descriptionLabel, .titleLabel) {}
     text-align: right;
 }
 
-.ratingLabel {
+.ratingLabel, .categoriesLabel {
     font-weight: bolder;
     font-size: 24px;
 }
@@ -75,7 +74,16 @@ label:not(.descriptionLabel, .titleLabel) {}
     width: 175px;
 }
 
-.yearBlock, .countryBlock, .durationBlock, .ratingBlock {
+.categoriesField{
+    font-weight: bold;
+    font-size: 24px;
+    padding-left: 20px;
+    white-space: nowrap;
+    text-decoration: underline;
+    width: 175px;
+}
+
+.yearBlock, .countryBlock, .durationBlock, .ratingBlock, .categoriesBlock {
     display: flex;
     text-shadow: 2px 2px 3px rgba(112, 112, 112, 0.78);
     justify-content: space-between;
@@ -126,6 +134,11 @@ label:not(.descriptionLabel, .titleLabel) {}
     height: auto;
 }
 
+.categoriesLabel{
+    width: auto;
+    text-align: right;
+}
+
 @media (max-width:1000px) {
     .movie-view {
         padding: 15px;
@@ -141,7 +154,7 @@ label:not(.descriptionLabel, .titleLabel) {}
         margin: auto;
         display: flex;
     }
-    .yearField, .countryField, .durationField,.ratingField {
+    .categoriesField, .yearField, .countryField, .durationField,.ratingField {
         padding-left: 0;
     }
 }
@@ -163,5 +176,11 @@ label:not(.descriptionLabel, .titleLabel) {}
 @media (max-width:325px) {
     .yearField, .countryField, .durationField {
         width: unset;
+    }
+}
+
+@media (max-width:294px) {
+    .categoriesBlock{
+        flex-wrap: wrap;
     }
 }

@@ -5,6 +5,7 @@ import { Spinner } from "reactstrap"
 import YoutubeEmbed from "./../YoutubeEmbed/YoutubeEmbed";
 import noimage from "./../MovieRedactor/no-image.png";
 import CommentBlock from "./../CommentBlock/CommentBlock";
+import CardText from "reactstrap/lib/CardText";
 
 
 
@@ -53,6 +54,21 @@ export function View() {
                         <div className="ratingBlock">
                             <div className="ratingField">IMDB Rating: </div>
                             <label className="ratingLabel">{movie.imdbRating}</label>
+                        </div>
+                        <div className="categoriesBlock">
+                            <div className="categoriesField">Categories: </div>
+                            <label className="categoriesLabel">
+                                {
+                                    (() => {
+                                        let text = "";
+                                        for (let i = 0; i < movie.categories.length; i++){
+                                            text += movie.categories[i] + ", ";
+                                        }
+                                        text = text.substring(0,text.length - 2);
+                                        return text;
+                                    })()
+                                }
+                            </label>
                         </div>
                         <div className="descriptionBlock">
                             <div className="descriptionField">Description:</div>
