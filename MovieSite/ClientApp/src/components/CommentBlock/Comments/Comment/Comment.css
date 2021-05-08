@@ -35,6 +35,11 @@
     height: 0;
 }
 
+.MuiInputBase-root {
+    width: auto;
+    border: none;
+}
+
 .comment-user-icon {
     margin: 0px;
     width: 100px;
@@ -61,7 +66,6 @@
 .comment-list-container {
     width: 100%;
 }
-
 
 .tr1 {
     height: 5px;
@@ -95,22 +99,24 @@
     height: auto;
     margin: 0;
 }
+
 .table th, .table td {
     padding: 0;
     border-top: none;
 }
 
-
-.text{
+.text {
     text-align: justify;
     /* margin: auto; */
     margin-left: 5px;
     margin-right: 5px;
+    word-break: break-word;
 }
 
-.comment{
+.comment {
     border: 1px solid black;
     border-radius: 10px;
     margin-top: 10px;
     padding: 2px;
 }
+
