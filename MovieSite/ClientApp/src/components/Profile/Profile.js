@@ -11,6 +11,7 @@ export function Profile() {
         if (!user) setUser(JSON.parse(JSON.parse(localStorage.getItem('User'))));
     },[user])
 
+
     return (
         <>
             {user

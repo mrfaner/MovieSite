@@ -52,7 +52,11 @@ namespace MovieSite.Controllers
         {
             return await userService.ChangeUserDataImage(user);
         }
-
+        [HttpPost("ChangeUserData/Arrays/")]
+        public async Task<User> ChangeUserDataArrays(User user)
+        {
+            return await userService.ChangeUserDataArrays(user);
+        }
         [HttpPost("GetUserData/{userId}")]
         public async Task<User> GetUserData(string userId)
         {

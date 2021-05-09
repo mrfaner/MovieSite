@@ -6,6 +6,7 @@ import YoutubeEmbed from "./../YoutubeEmbed/YoutubeEmbed";
 import noimage from "./../MovieRedactor/no-image.png";
 import CommentBlock from "./../CommentBlock/CommentBlock";
 import CardText from "reactstrap/lib/CardText";
+import Button from "reactstrap/lib/Button";
 
 
 
@@ -13,7 +14,43 @@ export function View() {
     const [movie, setMovie] = useState();
     const params = useParams().id
     const [isChanged, setIsChanged] = useState(false)
+    const [user, setUser] = useState();
 
+    useEffect(() => {
+        if (!user) setUser(JSON.parse(JSON.parse(localStorage.getItem('User'))));
+    }, [user])
+
+    function saveUserToLocal(xhr, user) {
+        console.log("test");
+        console.log(xhr);
+        let temp = JSON.parse(JSON.parse(user));
+
+        console.log(temp.userId);
+        if (temp.userId !== null) {
+            localStorage.setItem("User", user);
+            //window.location.reload();
+        }
+        else {
+            alert("Error");
+        }
+    }
+
+    function addArray(line) {
+        if (line === "later") {
+            user.userWatchLaterList.push(movie.movieId);
+        }
+        let xhr = new XMLHttpRequest();
+        xhr.open('post', 'api/users/ChangeUserData/Arrays/');
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                let responsedUser = JSON.stringify(xhr.responseText);
+                saveUserToLocal(xhr, responsedUser);
+            }
+        };
+        xhr.send(JSON.stringify(user));
+        console.log(xhr);
+    }
 
     useEffect(() => {
         if (!movie) {
@@ -39,6 +76,13 @@ export function View() {
                     <div className="movie-view">
                         <img className="imageView" src={(movie.image.includes("data:image")) ? movie.image : noimage} alt="Photo dont choose" />
                         <label className="titleLabel">{movie.name}</label>
+                        <div>
+                            <Button onClick={() => {
+                                addArray("later")
+                            }}>
+                                Add to watch later
+                            </Button>
+                        </div>
                         <div className="yearBlock">
                             <div className="yearField">Date: </div>
                             <label className="yearLabel">{movie.year}</label>
@@ -61,10 +105,10 @@ export function View() {
                                 {
                                     (() => {
                                         let text = "";
-                                        for (let i = 0; i < movie.categories.length; i++){
+                                        for (let i = 0; i < movie.categories.length; i++) {
                                             text += movie.categories[i] + ", ";
                                         }
-                                        text = text.substring(0,text.length - 2);
+                                        text = text.substring(0, text.length - 2);
                                         return text;
                                     })()
                                 }
