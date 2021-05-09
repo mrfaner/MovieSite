@@ -56,27 +56,47 @@ namespace MovieSite.Services
 
             return await Movies.Find(x => true).Skip(first).Limit(second - first).ToListAsync();
         }
-        public async Task<List<Movie>> GetMovies(string title, string category, string firstNumber, string secondNumber)
+        public async Task<List<Movie>> GetMoviesSearch(string title, string category, string sort)
         {
-            int first = Convert.ToInt32(firstNumber);
-            int second = Convert.ToInt32(secondNumber);
             FilterDefinition<Movie> filter = null;
-            if (!title.Equals(""))
+            if (!title.Equals("0"))
             {
                 Regex regex = new Regex(@$"[\s\S]*{title}[\s\S]*", RegexOptions.IgnoreCase);
                 filter = Builders<Movie>.Filter.Regex(x => x.Name, new BsonRegularExpression(regex));
-                if (!category.Equals(""))
+                if (!category.Equals("0"))
                 {
                     filter &= Builders<Movie>.Filter.AnyEq(x => x.Categories, category);
                 }
             }
-            else if (!category.Equals(""))
+            else if (!category.Equals("0"))
             {
                 filter = Builders<Movie>.Filter.AnyEq(x => x.Categories, category);
             }
             try
             {
-                return await Movies.Find(filter).Skip(first).Limit(second - first).ToListAsync();
+                switch (sort)
+                {
+                    default:
+                        {
+                            var TestSort1 = Builders<Movie>.Sort.Ascending("Name");
+                            return await Movies.Find(filter).Sort(TestSort1).ToListAsync();
+                        }
+                    case "2":
+                        {
+                            var TestSort1 = Builders<Movie>.Sort.Descending("Name");
+                            return await Movies.Find(filter).Sort(TestSort1).ToListAsync();
+                        }
+                    case "3":
+                        {
+                            var TestSort1 = Builders<Movie>.Sort.Ascending("IMDBRating");
+                            return await Movies.Find(filter).Sort(TestSort1).ToListAsync();
+                        }
+                    case "4":
+                        {   
+                            var TestSort1 = Builders<Movie>.Sort.Descending("IMDBRating");
+                            return await Movies.Find(filter).Sort(TestSort1).ToListAsync();
+                        }
+                }
             }
             catch
             {

@@ -3,6 +3,7 @@ import React from 'react';
 import { Navbar, NavbarBrand, NavItem } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import UserIcon from "./Images/user.png"
+import SearchIcon from "./Images/Search.png"
 // import SearchIcon from "./Images/SearchLogo.png"
 import './NavMenu.css';
 import {ModalWindow} from "./ModalWindow/ModalWindow";
@@ -36,6 +37,10 @@ return (
               <div className="funcybtn">
                 MovieSite
               </div>
+
+          </NavbarBrand>
+          <NavbarBrand tag={Link} to="/Search/">
+              <img src={SearchIcon} className="SearchIcon"/>
 
           </NavbarBrand>
 

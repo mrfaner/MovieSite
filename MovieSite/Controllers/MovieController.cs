@@ -35,10 +35,10 @@ namespace MovieSite.Controllers
             return await movieService.GetMovies(firstNumber, secondNumber);
         }
 
-        [HttpGet("GetMovieSearch/{title},{category}/{firstNumber},{secondNumber}")]
-        public async Task<List<Movie>> GetMoviesSearch(string title, string category, string firstNumber, string secondNumber)
+        [HttpGet("GetMovieSearch/{title},{category}/{sort}")]
+        public async Task<List<Movie>> GetMoviesSearch(string title, string category, string sort)
         {
-            return await movieService.GetMovies(title, category, firstNumber, secondNumber);
+            return await movieService.GetMoviesSearch(title, category, sort);
         }
 
         [HttpGet("GetMovieByMovieId/{movieId}")]

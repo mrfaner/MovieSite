@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import MovieCardList from "./../MovieCard/MovieCardList";
+import MovieCardListWithoutShowMore from "./../MovieCard/MovieCardListWithoutShowMore";
 import "./SearchPage.css";
 import NativeSelect from '@material-ui/core/NativeSelect';
+import Button from "reactstrap/lib/Button";
 
 const useFormField = (initialValue) => {
     const [value, setValue] = React.useState(initialValue);
@@ -83,12 +84,7 @@ export function SearchPage() {
     function handleSubmit() {
         let xhr = new XMLHttpRequest();
         let string;
-        if (movieList && movieList?.length !== 0) {
-            string = "api/movies/GetMovieSearch/" + TitleField.get() + "," + (state.categorys? categories[state.categorys] : "0") +"/0," + (parseInt(movieList.length, 10) + 10);
-
-        } else {
-            string = "api/movies/GetMovieSearch/" + (TitleField.get().trim()===""? "0" : TitleField.get().trim()) + "," + (state.categorys? categories[state.categorys] : 0 ) +"/0,11";
-        }
+        string = "api/movies/GetMovieSearch/" + (TitleField.get().trim() === "" ? "0" : TitleField.get().trim()) + "," + (state.categorys ? categories[state.categorys] : 0) + "/" + state.sort;
         xhr.open("get", string, true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
@@ -110,7 +106,7 @@ export function SearchPage() {
             </div>
             <div className="searchPageParams">
                 <div className="searchPageSetTitle">
-                    <div className="searchPageTitle">
+                    <div className="searchPageTitles">
                         Title:
                     </div>
                     <input className="searchPageSetTitleInput" name="title"
@@ -126,30 +122,52 @@ export function SearchPage() {
                         name="categorys"
                         className="categorySelector"
                         inputProps={{ 'aria-label': 'categorys' }}
+                        style ={{width: "182px", border : "1px solid black", borderRadius: "5px"}}
                     >
                         <option value=''>None</option>
                         {
                             categories.map((category, index) => {
                                 return (
-                                    <option key = {index} value={index}>{category}</option>
+                                    <option key={index} value={index}>{category}</option>
                                 )
                             })
                         }
                     </NativeSelect>
                 </div>
+                <div className="searchPageSetSorting">
+                    <div className="searchPageSortingTitle">
+                        Sort by:
+                    </div>
+                    <NativeSelect
+                        value={state.sort}
+                        onChange={handleChange}
+                        name="sort"
+                        className="categorySort"
+                        inputProps={{ 'aria-label': 'sort' }}
+                        inputProps={{ 'aria-label': 'categorys' }}
+                        style ={{width: "182px", border : "1px solid black", borderRadius: "5px"}}
+
+                    >
+                        <option value={1}>Name</option>
+                        <option value={2}>Name(desc)</option>
+                        <option value={3}>Rating</option>
+                        <option value={4}>Rating(desc)</option>
+                    </NativeSelect>
+
+                </div>
             </div>
 
-            <div onClick={() => {
+            <Button className="searchButton" onClick={() => {
                 handleSubmit()
             }}>
-                button
-                </div>
+                Search
+                </Button>
 
 
             {movieList ?
                 (
                     <div className="movieListArea">
-                        <MovieCardList MovieList={movieList}
+                        <MovieCardListWithoutShowMore MovieList={movieList}
                             getMovies={getMovies}
                         />
                     </div>
