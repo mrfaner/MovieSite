@@ -29,6 +29,18 @@ namespace MovieSite.Controllers
             return await movieService.GetMovies();
         }
 
+        [HttpGet("GetWatchLaterList/{userId}")]
+        public async Task<List<Movie>> GetWatchLaterMovieListByUserId(string userId)
+        {
+            return await movieService.GetWatchLaterMovieListByUserId(userId);
+        }
+
+        [HttpGet("GetWatchList/{userId}")]
+        public async Task<List<Movie>> GetWatchMovieListByUserId(string userId)
+        {
+            return await movieService.GetWatchMovieListByUserId(userId);
+        }
+
         [HttpGet("{firstNumber},{secondNumber}")]
         public async Task<List<Movie>> GetMovies(string firstNumber, string secondNumber)
         {

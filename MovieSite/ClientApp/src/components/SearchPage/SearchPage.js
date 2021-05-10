@@ -59,7 +59,7 @@ export function SearchPage() {
     const [movieList, setMovieList] = useState();
     const getMovies = useCallback(() => {
         setMovieList();
-    }, [movieList])
+    }, [setMovieList])
 
     const [state, setState] = React.useState({
         age: '',
@@ -122,7 +122,7 @@ export function SearchPage() {
                         name="categorys"
                         className="categorySelector"
                         inputProps={{ 'aria-label': 'categorys' }}
-                        style ={{width: "182px", border : "1px solid black", borderRadius: "5px"}}
+                        style={{ width: "182px", border: "1px solid black", borderRadius: "5px" }}
                     >
                         <option value=''>None</option>
                         {
@@ -144,8 +144,7 @@ export function SearchPage() {
                         name="sort"
                         className="categorySort"
                         inputProps={{ 'aria-label': 'sort' }}
-                        inputProps={{ 'aria-label': 'categorys' }}
-                        style ={{width: "182px", border : "1px solid black", borderRadius: "5px"}}
+                        style={{ width: "182px", border: "1px solid black", borderRadius: "5px" }}
 
                     >
                         <option value={1}>Name</option>

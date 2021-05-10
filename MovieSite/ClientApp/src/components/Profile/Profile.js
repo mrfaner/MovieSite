@@ -3,7 +3,7 @@ import "./Profile.css"
 import logo from './DefAvatar.jpg';
 import { useHistory } from "react-router-dom";
 import Button from "reactstrap/lib/Button";
-import MovieCardListWithoutShowMore from "./../MovieCard/MovieCardList";
+import MovieCardListWithoutShowMore from "./../MovieCard/MovieCardListWithoutShowMore";
 
 export function Profile() {
     const history = useHistory();
@@ -19,15 +19,36 @@ export function Profile() {
     function ChooseTab(line) {
         switch (line) {
             case "Later": {
-                if (isLater) {
-                    SetIsLater(true);
-                }
+                console.log(user)
+                SetIsLater(true);
+                let xhr = new XMLHttpRequest();
+                let string = "api/movies/GetWatchLaterList/" + user.userId;
+                xhr.open("get", string, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        setMovieList(JSON.parse(xhr.responseText));
+                    }
+                };
+                xhr.send();
+                console.log(xhr);
                 break;
             }
             case "Watch": {
-                if (!isLater) {
-                    SetIsLater(false);
-                }
+                SetIsLater(false);
+                let xhr = new XMLHttpRequest();
+                let string = "api/movies/GetWatchList/" + user.userId;
+                xhr.open("get", string, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        setMovieList(JSON.parse(xhr.responseText));
+                    }
+                };
+                xhr.send();
+                console.log(xhr);
                 break;
             }
             default: {
@@ -35,49 +56,47 @@ export function Profile() {
             }
         }
     }
-
-    return (
-        <>
-            {user
-                ? (
-                    <div>
-                        <div className="profile-box">
-                            <div className="heading">Profile</div>
-                            <img className="avatar" src={user.image ? user.image : logo} alt="Logo" />
-                            <div className="names">{user.firstName + ' ' + user.lastName}</div>
-                            <button onClick={() => { history.push("/Redactor/" + user.userId) }}>AddNews</button>
-                        </div>
-                        <div className="formPicker">
-                            <Button onClick={() => ChooseTab("Later")} className={isLater ? "nonActive" : " active"}>
-                                Watch later list
-                                </Button>
-                            <Button onClick={() => ChooseTab("Watch")} className={isLater ? " active" : "nonActive"}>
-                                Viewed list
-                                </Button>
-                        </div>
+    if (user) {
+        return (
+            <div>
+                <div className="profile-box">
+                    <div className="heading">Profile</div>
+                    <img className="avatar" src={user.image ? user.image : logo} alt="Logo" />
+                    <div className="names">{user.firstName + ' ' + user.lastName}</div>
+                    <Button className="addNewsButton" onClick={() => { history.push("/Redactor/" + user.userId) }}>AddNews</Button>
+                </div>
+                <div className="buttonblock">
+                    <Button onClick={() => ChooseTab("Later")} className={isLater ? "btnNonActive" : " btnActive"}>
+                        Watch later list
+            </Button>
+                    <Button onClick={() => ChooseTab("Watch")} className={isLater ? " btnActive" : "btnNonActive"}>
+                        Viewed list
+            </Button>
+                </div>
+                {
+                    movieList ? (
                         <div>
-                            <MovieCardListWithoutShowMore MovieList={movieList}
-                            />
+                            <MovieCardListWithoutShowMore MovieList={movieList} />
                         </div>
-
-                    </div>
-                )
-                : (
-                    <div>loading</div>
-                )
-            }
-
-        </>
-
-        /*<div className="profile-box">
-            <div className ="heading">Profile</div>
-            <img className="avatar" src={logo} alt="Logo" />
-            <div className="names">{user.FirstName + ' ' + user.LastName}</div>
-            <div className="your-movies">Your movie`s</div>
-            <div className="movieListArea">
-                <MovieCardList MovieList={movieList} />
+                    ) : null
+                }
             </div>
-        </div>*/
-    );
+        )
+    } else {
+        return (
+            <div>loading</div>
+        )
+    }
+
+    /*<div className="profile-box">
+        <div className ="heading">Profile</div>
+        <img className="avatar" src={logo} alt="Logo" />
+        <div className="names">{user.FirstName + ' ' + user.LastName}</div>
+        <div className="your-movies">Your movie`s</div>
+        <div className="movieListArea">
+            <MovieCardList MovieList={movieList} />
+        </div>
+    </div>*/
+
 
 }

@@ -21,6 +21,19 @@
     align-items: center;
 }
 
+.btnNonActive, .btnActive {
+    max-width: 50%;
+    min-width: 130px;
+    white-space: nowrap;
+}
+
+.buttonblock {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .names {
     font-size: 40px;
 }

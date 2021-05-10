@@ -44,6 +44,32 @@ namespace MovieSite.Services
             return await Movies.Find(x => x.MovieId == movieId).FirstOrDefaultAsync();
         }
 
+        public async Task<List<Movie>> GetWatchLaterMovieListByUserId(string userId)
+        {
+            IMongoCollection<User> Users = DataBaseService.GetMongoCollection<User>("Users");
+            var foundUser = await Users.Find(x => x.UserId == userId).ToListAsync();
+
+            List<Movie> list = new List<Movie>();
+            foreach (var arrayItem in foundUser[0].UserWatchLaterList)
+            {
+                list.Add(await GetMovieByMovieId(arrayItem));
+            }
+            return list;
+        }
+
+        public async Task<List<Movie>> GetWatchMovieListByUserId(string userId)
+        {
+            IMongoCollection<User> Users = DataBaseService.GetMongoCollection<User>("Users");
+            var foundUser = await Users.Find(x => x.UserId == userId).ToListAsync();
+
+            List<Movie> list = new List<Movie>();
+            foreach (var arrayItem in foundUser[0].UserWatchList)
+            {
+                list.Add(await GetMovieByMovieId(arrayItem));
+            }
+            return list;
+        }
+
         public async Task<List<Movie>> GetMovies()
         {
             return await Movies.Find(x => true).ToListAsync();
