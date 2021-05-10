@@ -128,9 +128,6 @@ export function Settings() {
     }
 
     async function handleSubmit(line) {
-
-        let err
-
         switch (line) {
             case "Avatar": {
                 Change(user, "Image", logo);
@@ -176,6 +173,7 @@ export function Settings() {
     async function errorsValidator(line) {
         let errors = {};
         switch (line) {
+            default: break;
             case "Email": {
                 if (!EmailField.get().trim()) errors["EmailEmpty"] = true;
                 return errors;

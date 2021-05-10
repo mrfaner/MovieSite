@@ -4,7 +4,7 @@
     margin-top: -40px;
 }
 
-.SearchIcon{
+.SearchIcon {
     height: 50px;
     width: 50px;
     object-fit: fill;
@@ -14,7 +14,7 @@
 }
 
 @media (max-width: 310px) {
-    .funcybtn{
+    .funcybtn {
         font-size: 25px;
         position: relative;
         margin: 0;

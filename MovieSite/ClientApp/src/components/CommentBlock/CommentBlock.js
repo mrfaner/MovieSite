@@ -22,27 +22,29 @@ function CommentBlock({ movieId }) {
 
     const [comments, setComments] = useState()
     const userId = useRef()
-    const [rating, setRating] = useState(0)
+    const [rating] = useState(0)
     const commentText = useFormField()
 
     useEffect(() => {
-        userId.current = JSON?.parse(JSON?.parse(localStorage?.getItem("User")))?.userId
+        if (!comments) {
+            userId.current = JSON?.parse(JSON?.parse(localStorage?.getItem("User")))?.userId
 
-        let xhr = new XMLHttpRequest()
+            let xhr = new XMLHttpRequest()
 
-        xhr.open("get", "api/moviecomments/GetCommentsByMovieId/" + movieId, true)
-        xhr.setRequestHeader("Content-Type", "application/json")
+            xhr.open("get", "api/moviecomments/GetCommentsByMovieId/" + movieId, true)
+            xhr.setRequestHeader("Content-Type", "application/json")
 
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                let response = JSON.parse(xhr.responseText)
-                console.log(response)
-                setComments(response)
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    let response = JSON.parse(xhr.responseText)
+                    console.log(response)
+                    setComments(response)
+                }
             }
+            xhr.send()
+            console.log(xhr)
         }
-        xhr.send()
-        console.log(xhr)
-    }, [])
+    }, [comments, movieId])
 
     function updateList() {
         let xhr = new XMLHttpRequest()
@@ -96,7 +98,7 @@ function CommentBlock({ movieId }) {
             </div>
             {userId.current && (
                 <div className="new-comment-container">
-                    <TextField style={{border: "1px solid black"}} className="comment-input"
+                    <TextField style={{ border: "1px solid black" }} className="comment-input"
                         placeholder="   Comment text"
                         multiline
                         rowsMax={4}

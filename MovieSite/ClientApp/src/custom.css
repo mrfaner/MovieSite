@@ -1,5 +1,4 @@
-
-input,button {
+input, button {
   text-shadow: 2px 2px 3px rgba(112, 112, 112, 0.78);
 }
 
@@ -15,7 +14,7 @@ html, body, #root, .page {
   }
 }
 
-.container{
+.container {
   border: black 1px solid;
   border-radius: 10px;
   margin-top: 20px;

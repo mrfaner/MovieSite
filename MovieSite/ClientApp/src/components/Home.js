@@ -13,9 +13,6 @@ import { Spinner } from "reactstrap";
 
 
 export function Home() {
-
-    const [input, setInput] = useState('');
-
     const [movieList, setMovieList] = useState();
 
     const getMovies = useCallback(() => {
@@ -43,26 +40,6 @@ export function Home() {
         if (!movieList) getMovies();
     }, [movieList, getMovies])
 
-    const updateInput = async (input) => {
-        if (input !== "") {
-            let xhr = new XMLHttpRequest();
-            xhr.open("get", "api/movies/GetMoviesByTitle/" + input, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    setMovieList(JSON.parse(xhr.responseText));
-                }
-            };
-            xhr.send();
-
-            console.log(xhr);
-        }
-        else {
-            getMovies();
-        }
-        setInput(input);
-    }
-
     return (
         <div className="Home">
             {/*<SearchBar
@@ -70,14 +47,14 @@ export function Home() {
                 setKeyword={updateInput}
             />*/}
             {
-                 movieList
-                     ? (<div className="movieListArea">
-                         <MovieCardList MovieList={movieList}
-                             getMovies={getMovies}
-                         />
-                     </div>)
-                     : (<Spinner className="spinner"/>
-)
+                movieList
+                    ? (<div className="movieListArea">
+                        <MovieCardList MovieList={movieList}
+                            getMovies={getMovies}
+                        />
+                    </div>)
+                    : (<Spinner className="spinner" />
+                    )
             }
 
         </div>

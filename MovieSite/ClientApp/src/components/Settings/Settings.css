@@ -6,11 +6,11 @@
     border-radius: 5px;
 }
 
-.settingsAvatar:hover{
+.settingsAvatar:hover {
     transform: scale(1.015);
 }
 
-.settingsBlock, .avatarSet,.PasswordSet,.NamesSet {
+.settingsBlock, .avatarSet, .PasswordSet, .NamesSet {
     padding-top: 10px;
     display: flex;
     flex-direction: column;
@@ -36,20 +36,20 @@
     margin-top: 10px;
 }
 
-.fileInput{
+.fileInput {
     width: 100%;
 }
 
-.NamesSet{
+.NamesSet {
     margin-bottom: 30px;
 }
 
 @media (max-width:300px) {
-    .settingsAvatar{
-        height:auto;
+    .settingsAvatar {
+        height: auto;
         width: calc(100%);
     }
-    .settingsBlock, .avatarSet,.PasswordSet,.NamesSet {
+    .settingsBlock, .avatarSet, .PasswordSet, .NamesSet {
         width: calc(100%);
     }
 }

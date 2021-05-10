@@ -10,18 +10,18 @@ import { SearchPage } from "./components/SearchPage/SearchPage"
 import './custom.css'
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
     render() {
         return (
             <div className="page">
                 <Layout>
-                    <Route exact path='/' component={Home}/>
+                    <Route exact path='/' component={Home} />
                     <Route exact path='/Profile/' component={Profile} />
-                    <Route exact path='/Redactor/:id' component={MovieRedactor}/>
-                    <Route exact path='/MoviePage/:id' component={View}/>
-                    <Route exact path='/Settings/' component={Settings}/>
-                    <Route exact path='/Search/' component={SearchPage}/>
+                    <Route exact path='/Redactor/:id' component={MovieRedactor} />
+                    <Route exact path='/MoviePage/:id' component={View} />
+                    <Route exact path='/Settings/' component={Settings} />
+                    <Route exact path='/Search/' component={SearchPage} />
                 </Layout>
             </div>
         );

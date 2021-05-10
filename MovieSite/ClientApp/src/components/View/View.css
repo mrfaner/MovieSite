@@ -11,17 +11,16 @@
     transform: scale(1.015);
 }
 
-
 .ratingLabel {
     text-align: right;
 }
 
-.descriptionField, .descriptionLabel, .trailerField {
+.descriptionField, .viewDescriptionLabel, .trailerField {
     display: flex;
     width: 100%;
 }
 
-.movie-view label:not(.descriptionLabel, .ratingLabel, .categoriesLabel) {
+.movie-view label:not(.viewDescriptionLabel, .ratingLabel, .categoriesLabel) {
     font-weight: bolder;
     display: flex;
     align-items: center;
@@ -74,7 +73,7 @@
     width: 175px;
 }
 
-.categoriesField{
+.categoriesField {
     font-weight: bold;
     font-size: 24px;
     padding-left: 20px;
@@ -95,7 +94,7 @@
     text-shadow: 2px 2px 3px rgba(112, 112, 112, 0.78);
 }
 
-.descriptionLabel {
+.viewDescriptionLabel {
     font-size: 24px;
     text-align: justify;
     text-shadow: 2px 2px 3px rgba(112, 112, 112, 0.78);
@@ -134,9 +133,18 @@
     height: auto;
 }
 
-.categoriesLabel{
+.categoriesLabel {
     width: auto;
     text-align: right;
+}
+
+.viewList {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.viewListBtn {
 }
 
 @media (max-width:1000px) {
@@ -154,7 +162,7 @@
         margin: auto;
         display: flex;
     }
-    .categoriesField, .yearField, .countryField, .durationField,.ratingField {
+    .categoriesField, .yearField, .countryField, .durationField, .ratingField {
         padding-left: 0;
     }
 }
@@ -180,7 +188,7 @@
 }
 
 @media (max-width:294px) {
-    .categoriesBlock{
+    .categoriesBlock {
         flex-wrap: wrap;
     }
 }

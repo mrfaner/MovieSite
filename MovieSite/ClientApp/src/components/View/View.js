@@ -5,7 +5,6 @@ import { Spinner } from "reactstrap"
 import YoutubeEmbed from "./../YoutubeEmbed/YoutubeEmbed";
 import noimage from "./../MovieRedactor/no-image.png";
 import CommentBlock from "./../CommentBlock/CommentBlock";
-import CardText from "reactstrap/lib/CardText";
 import Button from "reactstrap/lib/Button";
 
 
@@ -19,6 +18,22 @@ export function View() {
     useEffect(() => {
         if (!user) setUser(JSON.parse(JSON.parse(localStorage.getItem('User'))));
     }, [user])
+
+    useEffect(() => {
+        if (!movie) {
+            let xhr = new XMLHttpRequest()
+
+            xhr.open("get", "api/movies/GetMovieByMovieId/" + params, true)
+            xhr.setRequestHeader("Content-Type", "application/json")
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    setMovie(JSON.parse(xhr.responseText))
+                }
+            }
+            xhr.send()
+        }
+    }, [movie, params])
 
     function saveUserToLocal(xhr, user) {
         console.log("test");
@@ -40,7 +55,7 @@ export function View() {
             user.userWatchLaterList.push(movie.movieId);
             console.log("pushed");
             if (user.userWatchList.includes(movie.movieId)) {
-                let index = user.userWatchList.findIndex(currentValue => currentValue == movie.movieId)
+                let index = user.userWatchList.findIndex(currentValue => currentValue === movie.movieId)
                 console.log(index);
 
                 if (index !== -1) {
@@ -53,7 +68,7 @@ export function View() {
             user.userWatchList.push(movie.movieId);
             console.log("pushed");
             if (user.userWatchLaterList.includes(movie.movieId)) {
-                let index = user.userWatchLaterList.findIndex(currentValue => currentValue == movie.movieId)
+                let index = user.userWatchLaterList.findIndex(currentValue => currentValue === movie.movieId)
                 console.log(index);
 
                 if (index !== -1) {
@@ -63,12 +78,12 @@ export function View() {
                 }
             }
         } else if (line === "laterDelete") {
-            let index = user.userWatchLaterList.findIndex(currentValue => currentValue == movie.movieId)
+            let index = user.userWatchLaterList.findIndex(currentValue => currentValue === movie.movieId)
             console.log(user.userWatchLaterList);
             user.userWatchLaterList.splice(index, 1);
             console.log(user.userWatchLaterList);
         } else if (line === "newDelete") {
-            let index = user.userWatchList.findIndex(currentValue => currentValue == movie.movieId)
+            let index = user.userWatchList.findIndex(currentValue => currentValue === movie.movieId)
             console.log(user.userWatchList);
             user.userWatchList.splice(index, 1);
             console.log(user.userWatchList);
@@ -88,29 +103,14 @@ export function View() {
         console.log(xhr);
     }
 
-    useEffect(() => {
-        if (!movie) {
-            let xhr = new XMLHttpRequest()
-
-            xhr.open("get", "api/movies/GetMovieByMovieId/" + params, true)
-            xhr.setRequestHeader("Content-Type", "application/json")
-
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    setMovie(JSON.parse(xhr.responseText))
-                }
-            }
-            xhr.send()
-        }
-    }, [movie, params])
-
+    console.log(user);
     console.log(movie);
     return (
         <>
             {movie
                 ? (
                     <div className="movie-view">
-                        <img className="imageView" src={(movie.image.includes("data:image")) ? movie.image : noimage} alt="Photo dont choose" />
+                        <img className="imageView" src={(movie.image.includes("data:image")) ? movie.image : noimage} alt="Dont choose" />
                         <label className="titleLabel">{movie.name}</label>
                         <div className="viewList">
                             {
@@ -164,7 +164,7 @@ export function View() {
                         </div>
                         <div className="descriptionBlock">
                             <div className="descriptionField">Description:</div>
-                            <label className="descriptionLabel">{movie.description}</label>
+                            <label className="viewDescriptionLabel">{movie.description}</label>
                         </div>
                         {(movie.trailerLink !== null) ?
                             (

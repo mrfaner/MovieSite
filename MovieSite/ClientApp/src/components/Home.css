@@ -1,14 +1,16 @@
 ﻿/*.home{*/
+
 /*    margin-top: 10px;*/
+
 /*    margin-bottom: 10px;*/
+
 /*    height: calc(100% - 20px);*/
+
 /*    !*width: calc(100% - 16px);*!*/
+
 /*}*/
 
-
-
-
-.container{
+.container {
     display: block;
     height: calc(100% - 77px);
     width: calc(100% - 200px);
@@ -18,7 +20,7 @@
 }
 
 @media (max-width: 1000px) {
-    .container{
+    .container {
         width: 100%;
     }
 }
@@ -26,7 +28,6 @@
 .Home {
     height: 100%;
     width: 100%;
-    min-width: 760px;
 }
 
 .movieListArea {
@@ -37,7 +38,8 @@
     text-align: -webkit-center;
     padding: 15px;
 }
-.spinner{
+
+.spinner {
     margin: auto;
     margin-top: 240px;
     display: block;

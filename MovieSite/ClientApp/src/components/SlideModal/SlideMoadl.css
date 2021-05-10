@@ -2,7 +2,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.4);
     display: flex;
@@ -14,13 +14,13 @@
     z-index: 100;
 }
 
-.slideModal.modalClose .slideModal-body{
+.slideModal.modalClose .slideModal-body {
     animation: 0.3s ease topToBottom;
     bottom: -81%;
     opacity: 0;
 }
 
-.op-0{
+.op-0 {
     pointer-events: none;
     opacity: 0;
 }
@@ -40,7 +40,7 @@
     padding: 25px 10px;
 }
 
-.slideModal-line{
+.slideModal-line {
     height: 7px;
     width: 125px;
     border-radius: 15px;
@@ -53,29 +53,29 @@
     position: relative;
 }
 
-.slideModal-content{
+.slideModal-content {
     top: -7px;
     position: relative;
 }
 
 @keyframes bottomToTop {
-    0%{
+    0% {
         bottom: -81%;
     }
-    100%{
+    100% {
         bottom: 0;
     }
 }
 
 @keyframes topToBottom {
-    0%{
+    0% {
         opacity: 1;
         bottom: 0;
     }
-    99.99%{
+    99.99% {
         opacity: 1;
     }
-    100%{
+    100% {
         bottom: -81%;
         opacity: 0;
     }

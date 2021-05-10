@@ -136,12 +136,11 @@
         flex-wrap: wrap;
         justify-content: center;
     }
-    .mainSetBlock label:not(.descriptionLabel) {
-    }
+    .mainSetBlock label:not(.descriptionLabel) {}
 }
 
 @media (max-width:323px) {
-    .imageblock{
+    .imageblock {
         width: 100%;
         height: auto;
     }

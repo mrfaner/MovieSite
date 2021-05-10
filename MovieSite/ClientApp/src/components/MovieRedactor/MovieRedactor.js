@@ -8,7 +8,6 @@ import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
-import InputLabel from '@material-ui/core/InputLabel';
 
 
 const useFormField = (initialValue) => {
@@ -86,11 +85,9 @@ export function MovieRedactor() {
     const movieCountryField = useFormField("");
     const movieDurationField = useFormField("");
     const movieRatingField = useFormField("");
-    const cat = useFormField();
     const movieDescriptionField = useFormField("");
     const movielinkField = useFormField("");
     const [errorList, setErrorList] = React.useState({});
-    let pers;
     const handleChange = (event) => {
         setPersonName(event.target.value);
     };
@@ -180,7 +177,7 @@ export function MovieRedactor() {
         <div id="movie-redactor">
             <div className="mainSetBlock">
                 <span className="imageSelector">
-                    <img className="imageblock" src={image ? image : noimage} alt="Photo dont choose" />
+                    <img className="imageblock" src={image ? image : noimage} alt="Dont choose" />
                     <input className="imageInput"
                         type="file"
                         onChange={event => imageSelect(event)}
@@ -227,41 +224,41 @@ export function MovieRedactor() {
                         <label classname="categoriesLabelEditor">
                             Categories*:
                         </label>
-                            <Select
-                                labelId="demo-mutiple-checkbox-label"
-                                id="demo-mutiple-checkbox"
-                                multiple
-                                value={personName}
-                                onChange={handleChange}
-                                input={<Input />}
-                                renderValue={(selected) => selected.join(', ')}
-                                MenuProps={MenuProps}
+                        <Select
+                            labelId="demo-mutiple-checkbox-label"
+                            id="demo-mutiple-checkbox"
+                            multiple
+                            value={personName}
+                            onChange={handleChange}
+                            input={<Input />}
+                            renderValue={(selected) => selected.join(', ')}
+                            MenuProps={MenuProps}
 
-                            >
-                                {names.map((name) => (
-                                    <MenuItem key={name} value={name}>
-                                        <Checkbox checked={personName.indexOf(name) > -1} />
-                                        <ListItemText primary={name} />
-                                    </MenuItem>
-                                ))}
-                            </Select>
+                        >
+                            {names.map((name) => (
+                                <MenuItem key={name} value={name}>
+                                    <Checkbox checked={personName.indexOf(name) > -1} />
+                                    <ListItemText primary={name} />
+                                </MenuItem>
+                            ))}
+                        </Select>
                     </div>
 
-                    </div>
+                </div>
 
-                    <span className="description">
-                        <label className="descriptionLabel">Description*:</label>
-                        <textarea type={"textbox"}
-                            {...movieDescriptionField.bind} />
-                        {errorList["Description"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
-                    </span>
-                </div>
-                <div className="movie-buttons">
-                    <button className="movie-submit" onClick={movieSubmitHandler}>Add movie</button>
-                </div>
-                <div id="movie-dynamic-body">
-                </div>
+                <span className="description">
+                    <label className="descriptionLabel">Description*:</label>
+                    <textarea type={"textbox"}
+                        {...movieDescriptionField.bind} />
+                    {errorList["Description"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
+                </span>
             </div>
+            <div className="movie-buttons">
+                <button className="movie-submit" onClick={movieSubmitHandler}>Add movie</button>
+            </div>
+            <div id="movie-dynamic-body">
+            </div>
+        </div>
     );
 
 }
