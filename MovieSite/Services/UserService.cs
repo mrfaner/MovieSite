@@ -68,6 +68,24 @@ namespace MovieSite.Services
 
             update = update.Set(x => x.UserWatchLaterList, user.UserWatchLaterList);
 
+            List<User> foundUser = await Users.Find(x => x.UserId == user.UserId).ToListAsync();
+
+                await Users.UpdateOneAsync(filter, update);
+                update = update.Set(x => x.UserWatchList, user.UserWatchList);
+                await Users.UpdateOneAsync(filter, update);
+            foundUser = await Users.Find(x => x.UserId == user.UserId).ToListAsync();
+
+            return foundUser[0];
+        }
+
+        public async Task<User> ChangeUserDataArrayWatch(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(x => x.UserId, user.UserId);
+
+            var update = Builders<User>.Update.Set(x => x.UserId, user.UserId);
+
+            update = update.Set(x => x.UserWatchList, user.UserWatchList);
+
             await Users.UpdateOneAsync(filter, update);
 
             List<User> foundUser = await Users.Find(x => x.UserId == user.UserId).ToListAsync();

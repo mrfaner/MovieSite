@@ -28,7 +28,7 @@ export function View() {
         console.log(temp.userId);
         if (temp.userId !== null) {
             localStorage.setItem("User", user);
-            //window.location.reload();
+            window.location.reload();
         }
         else {
             alert("Error");
@@ -36,11 +36,46 @@ export function View() {
     }
 
     function addArray(line) {
-        if (line === "later") {
+        if (line === "later" && !user.userWatchLaterList.includes(movie.movieId)) {
             user.userWatchLaterList.push(movie.movieId);
+            console.log("pushed");
+            if (user.userWatchList.includes(movie.movieId)) {
+                let index = user.userWatchList.findIndex(currentValue => currentValue == movie.movieId)
+                console.log(index);
+
+                if (index !== -1) {
+                    console.log(user.userWatchList);
+                    user.userWatchList.splice(index, 1);
+                    console.log(user.userWatchList);
+                }
+            }
+        } else if (line === "new" && !user.userWatchList.includes(movie.movieId)) {
+            user.userWatchList.push(movie.movieId);
+            console.log("pushed");
+            if (user.userWatchLaterList.includes(movie.movieId)) {
+                let index = user.userWatchLaterList.findIndex(currentValue => currentValue == movie.movieId)
+                console.log(index);
+
+                if (index !== -1) {
+                    console.log(user.userWatchLaterList);
+                    user.userWatchLaterList.splice(index, 1);
+                    console.log(user.userWatchLaterList);
+                }
+            }
+        } else if (line === "laterDelete") {
+            let index = user.userWatchLaterList.findIndex(currentValue => currentValue == movie.movieId)
+            console.log(user.userWatchLaterList);
+            user.userWatchLaterList.splice(index, 1);
+            console.log(user.userWatchLaterList);
+        } else if (line === "newDelete") {
+            let index = user.userWatchList.findIndex(currentValue => currentValue == movie.movieId)
+            console.log(user.userWatchList);
+            user.userWatchList.splice(index, 1);
+            console.log(user.userWatchList);
+
         }
         let xhr = new XMLHttpRequest();
-        xhr.open('post', 'api/users/ChangeUserData/Arrays/');
+        xhr.open('post', 'api/users/ChangeUserData/ArrayLater/');
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onload = function () {
             if (xhr.status === 200) {
@@ -48,6 +83,7 @@ export function View() {
                 saveUserToLocal(xhr, responsedUser);
             }
         };
+        console.log(user);
         xhr.send(JSON.stringify(user));
         console.log(xhr);
     }
@@ -76,12 +112,24 @@ export function View() {
                     <div className="movie-view">
                         <img className="imageView" src={(movie.image.includes("data:image")) ? movie.image : noimage} alt="Photo dont choose" />
                         <label className="titleLabel">{movie.name}</label>
-                        <div>
-                            <Button onClick={() => {
-                                addArray("later")
-                            }}>
-                                Add to watch later
-                            </Button>
+                        <div className="viewList">
+                            {
+                                (() => {
+                                    if (user.userWatchLaterList.includes(movie.movieId))
+                                        return <Button className="viewListBtn" onClick={() => { addArray("laterDelete") }}>Remove from watch later list</Button>
+                                    else
+                                        return <Button className="viewListBtn" onClick={() => { addArray("later") }}>Add to watch later list</Button>
+                                })()
+                            }
+                            {
+                                (() => {
+                                    if (user.userWatchList.includes(movie.movieId))
+                                        return <Button className="viewListBtn" onClick={() => { addArray("newDelete") }}>Remove from viewed list</Button>
+                                    else
+                                        return <Button className="viewListBtn" onClick={() => { addArray("new") }}>Add to viewed list</Button>
+                                })()
+
+                            }
                         </div>
                         <div className="yearBlock">
                             <div className="yearField">Date: </div>
