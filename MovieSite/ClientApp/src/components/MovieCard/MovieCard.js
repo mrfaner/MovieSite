@@ -17,19 +17,10 @@ function MovieCard(props) {
                 <h2>{props.movie.name}</h2>
                 <p className="cardText">{props.movie.description}</p>
                 <NavbarBrand tag={Link} to={"/MoviePage/" + props.movie.movieId}>
-                    <Button>Читати...</Button>
+                    <Button>ReadMore...</Button>
                 </NavbarBrand>
             </div>
         </div>
-        // <Card className="movieBody">
-        //     <CardTitle>
-        //         <p>{props.index}</p>
-        //         {props.movie.title}
-        //     </CardTitle>
-        //    <CardBody>
-        //        {props.movie.text}
-        //    </CardBody>
-        // </Card>
     );
 
 }

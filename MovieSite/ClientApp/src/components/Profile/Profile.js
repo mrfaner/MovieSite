@@ -63,7 +63,7 @@ export function Profile() {
                     <div className="heading">Profile</div>
                     <img className="avatar" src={user.image ? user.image : logo} alt="Logo" />
                     <div className="names">{user.firstName + ' ' + user.lastName}</div>
-                    <Button className="addNewsButton" onClick={() => { history.push("/Redactor/" + user.userId) }}>AddNews</Button>
+                    <Button className="addNewsButton" onClick={() => { history.push("/Redactor/" + user.userId) }}>Add new movie</Button>
                 </div>
                 <div className="buttonblock">
                     <Button onClick={() => ChooseTab("Later")} className={isLater ? "btnNonActive" : " btnActive"}>

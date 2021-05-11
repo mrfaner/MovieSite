@@ -38,21 +38,6 @@ function Comment({ comment, userId, updateList }) {
         xhr.send(comment.commentId);
     }, [comment.commentId, updateList]);
     return (
-        // <div className="comment">
-        //     <img className="comment-user-icon" src={userIcon} style={{ margin: 0 }} />
-        //     <div className="comment-user-name">
-        //         {userName}
-        //     </div>
-        //     <div className="comment-data">
-        //         {comment?.dateTime.replace("T", " ").replace("Z", "")}
-        //     </div>
-        //     { userId === comment.userId && (
-        //         <div className="comment-remove" onClick={deleteCommentHandler}>&#128465;</div>
-        //     )}
-        //     <div className="text">
-        //         {comment?.text}
-        //     </div>
-        // </div>
 
         <div className="comment">
             <table className="table">
