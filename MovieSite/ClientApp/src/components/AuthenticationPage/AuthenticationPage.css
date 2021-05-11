@@ -1,5 +1,4 @@
-
-.AuthenticationForm{
+.AuthenticationForm {
     width: max-content;
     height: max-content;
     text-align: center;
@@ -10,7 +9,21 @@
     margin-top: auto;
 }
 
-button.nonActive, button.active{
+.emptyErrorTitle {
+    display: block;
+    font-size: large;
+    margin-left: 5px;
+    position: relative;
+    color: red;
+    font-weight: bold;
+    z-index: 1;
+    width: auto;
+    height: 100%;
+    white-space: nowrap;
+    text-shadow: none;
+}
+
+button.nonActive, button.active {
     border: 1px gray groove;
     border-radius: 5px;
     margin-left: 2.5px;
@@ -20,29 +33,23 @@ button.nonActive, button.active{
     transition-duration: 0.4s;
 }
 
-button.active{
+button.active {
     background: forestgreen;
     color: white;
 }
 
-
-button.nonActive:hover, button.active:hover{
+button.nonActive:hover, button.active:hover {
     transform: scale(1.1);
-}
-
-.notSetValue{
-    color: white;
-    background: indianred;
 }
 
 .formPicker {
     height: 35px;
 }
 
-.AuthenticationForm form{
+.AuthenticationForm form {
     margin-top: 10px;
 }
 
-.AuthenticationForm p{
+.AuthenticationForm p {
     margin-bottom: 10px;
 }

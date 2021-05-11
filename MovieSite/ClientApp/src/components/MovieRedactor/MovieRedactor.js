@@ -8,6 +8,7 @@ import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
+import { useHistory } from "react-router-dom";
 
 
 const useFormField = (initialValue) => {
@@ -87,6 +88,8 @@ export function MovieRedactor() {
     const movieRatingField = useFormField("");
     const movieDescriptionField = useFormField("");
     const movielinkField = useFormField("");
+    const history = useHistory();
+
     const [errorList, setErrorList] = React.useState({});
     const handleChange = (event) => {
         setPersonName(event.target.value);
@@ -101,7 +104,8 @@ export function MovieRedactor() {
         if (!movieCountryField.get().trim()) errors["Country"] = true;
         if (!movieDurationField.get().trim()) errors["Duration"] = true;
         if (!movieRatingField.get().trim()) errors["Rating"] = true;
-
+        if (personName.length === 0) errors["Category"] = true;
+        console.log(personName);
         return errors;
     }
 
@@ -166,6 +170,11 @@ export function MovieRedactor() {
             });
             xhr.open("post", "api/movies", true);
             xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onload = function () {
+                if (xhr.status === 200){
+                    history.push("/");
+                }
+            };    
             xhr.send(movie);
             console.log(movie);
         }
@@ -221,16 +230,19 @@ export function MovieRedactor() {
                             {...movielinkField.bind} />
                     </span>
                     <div className="categoriesBox">
-                        <label classname="categoriesLabelEditor">
+                        <label className="categoriesLabelEditor">
                             Categories*:
                         </label>
                         <Select
+                            className="CatSel"
                             labelId="demo-mutiple-checkbox-label"
                             id="demo-mutiple-checkbox"
                             multiple
                             value={personName}
                             onChange={handleChange}
                             input={<Input />}
+                            style={{width: "182px", border:"1px solid #767676"}}
+
                             renderValue={(selected) => selected.join(', ')}
                             MenuProps={MenuProps}
 
@@ -242,6 +254,8 @@ export function MovieRedactor() {
                                 </MenuItem>
                             ))}
                         </Select>
+                        {errorList["Category"] ? <div className="emptyErrorTitle">Select category</div> : null}
+
                     </div>
 
                 </div>

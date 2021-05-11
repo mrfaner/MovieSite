@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 function MovieCard(props) {
 
-    console.log(props.movie);
 
 
     return (

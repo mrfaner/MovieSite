@@ -14,13 +14,19 @@ html, body, #root, .page {
   }
 }
 
+header{
+  background: #f0f8ffd1;
+}
+
 .container {
   border: black 1px solid;
   border-radius: 10px;
   margin-top: 20px;
   margin-bottom: 30px;
   padding: 5px;
+  background: #f0f8ffd1;
 }
+
 
 .main {
   padding: 10px;

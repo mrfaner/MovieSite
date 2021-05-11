@@ -6,7 +6,7 @@ import YoutubeEmbed from "./../YoutubeEmbed/YoutubeEmbed";
 import noimage from "./../MovieRedactor/no-image.png";
 import CommentBlock from "./../CommentBlock/CommentBlock";
 import Button from "reactstrap/lib/Button";
-
+import { useHistory } from "react-router-dom";
 
 
 export function View() {
@@ -14,6 +14,7 @@ export function View() {
     const params = useParams().id
     const [isChanged, setIsChanged] = useState(false)
     const [user, setUser] = useState();
+    const history = useHistory();
 
     useEffect(() => {
         if (!user) setUser(JSON.parse(JSON.parse(localStorage.getItem('User'))));
@@ -48,6 +49,19 @@ export function View() {
         else {
             alert("Error");
         }
+    }
+
+    function deleteMovie() {
+        let xhr = new XMLHttpRequest();
+        xhr.open('post', 'api/movies/DeleteMovie/' + movie.movieId);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onload = function () {
+            if (xhr.status === 200){
+                history.push("/");
+            }
+        };
+        console.log(xhr);
+        xhr.send(JSON.stringify(user));
     }
 
     function addArray(line) {
@@ -115,18 +129,22 @@ export function View() {
                         <div className="viewList">
                             {
                                 (() => {
-                                    if (user.userWatchLaterList.includes(movie.movieId))
-                                        return <Button className="viewListBtn" onClick={() => { addArray("laterDelete") }}>Remove from watch later list</Button>
-                                    else
-                                        return <Button className="viewListBtn" onClick={() => { addArray("later") }}>Add to watch later list</Button>
+                                    if (user && user.userWatchLaterList) {
+                                        if (user.userWatchLaterList?.includes(movie.movieId))
+                                            return <Button className="viewListBtn" onClick={() => { addArray("laterDelete") }}>Remove from watch later list</Button>
+                                        else
+                                            return <Button className="viewListBtn" onClick={() => { addArray("later") }}>Add to watch later list</Button>
+                                    }
                                 })()
                             }
                             {
                                 (() => {
-                                    if (user.userWatchList.includes(movie.movieId))
-                                        return <Button className="viewListBtn" onClick={() => { addArray("newDelete") }}>Remove from viewed list</Button>
-                                    else
-                                        return <Button className="viewListBtn" onClick={() => { addArray("new") }}>Add to viewed list</Button>
+                                    if (user && user.userWatchLaterList) {
+                                        if (user?.userWatchList?.includes(movie.movieId))
+                                            return <Button className="viewListBtn" onClick={() => { addArray("newDelete") }}>Remove from viewed list</Button>
+                                        else
+                                            return <Button className="viewListBtn" onClick={() => { addArray("new") }}>Add to viewed list</Button>
+                                    }
                                 })()
 
                             }
@@ -161,6 +179,19 @@ export function View() {
                                     })()
                                 }
                             </label>
+                        </div>
+                        <div className="deletebtnView">
+                            {
+                                (() => {
+                                    if (user?.role){
+                                        return (
+                                            <Button className="viewDeletetBtn" onClick={() => { deleteMovie() }}>
+                                            Delete this movie
+                                        </Button>            
+                                        )
+                                    }
+                                })()
+                            }
                         </div>
                         <div className="descriptionBlock">
                             <div className="descriptionField">Description:</div>

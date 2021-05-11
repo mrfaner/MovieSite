@@ -135,9 +135,11 @@ namespace MovieSite.Services
             await Movies.ReplaceOneAsync(x => x.MovieId == movie.MovieId, movie);
         }
 
-        public async Task DeleteMovie(string id)
+        public async Task<string> DeleteMovie(string id)
         {
-            await Movies.DeleteOneAsync(x => x.MovieId == id);
+            var filter = Builders<Movie>.Filter.Where(x => x.MovieId == id);
+            await Movies.DeleteOneAsync(filter);
+            return "ok";
         }
     }
 }

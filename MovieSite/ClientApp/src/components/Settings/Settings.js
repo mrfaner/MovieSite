@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Settings.css"
 import nophoto from "./../MovieRedactor/no-image.png";
+import Button from "reactstrap/lib/Button";
 
 const useFormField = (initialValue) => {
     const [value, setValue] = React.useState(initialValue);
@@ -208,7 +209,7 @@ export function Settings() {
 
     return (
         <div className="settingsBlock">
-            <div className="avatarSet">
+            <div className="avatarSet" style={{gap: "1rem"}}>
                 {
                     (() => {
                         if (logo)
@@ -221,11 +222,11 @@ export function Settings() {
                     })()
                 }
                 <input className="fileInput" type="file" onChange={event => imageSelect(event)} />
-                <button onClick={() => {
+                <Button onClick={() => {
                     handleSubmit("Avatar")
                 }}>
                     ChangeAvatar
-                </button>
+                </Button>
             </div>
             <div className="EmailSet">
                 Email
@@ -234,11 +235,11 @@ export function Settings() {
                 <input name="Email"
                     type="email" {...EmailField.bind} />
                 {errorList["EmailEmpty"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
-                <button onClick={async () => {
+                <Button onClick={async () => {
                     await handleSubmit("Email")
                 }}>
                     Change Email
-                    </button>
+                    </Button>
             </div>
             <br />
             <div className="PasswordSet">
@@ -256,11 +257,11 @@ export function Settings() {
                 <input name="PasswordR"
                     type="password" {...PasswordRField.bind} />
                 {errorList["RepEmpty"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
-                <button onClick={async () => {
+                <Button onClick={async () => {
                     await handleSubmit("Password")
                 }}>
                     Change Password
-                    </button>
+                    </Button>
             </div>
             <div className="NamesSet">
                 FirstName
@@ -271,11 +272,11 @@ export function Settings() {
                 <input name="LastName"
                     type="text" {...LastNameField.bind} />
                 {errorList["LastName"] ? <div className="emptyErrorTitle">Field is empty</div> : null}
-                <button onClick={async () => {
+                <Button onClick={async () => {
                     await handleSubmit("Names")
                 }}>
                     Change Names
-                    </button>
+                    </Button>
             </div>
 
         </div>

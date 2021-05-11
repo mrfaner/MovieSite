@@ -1,7 +1,7 @@
 ﻿.funcybtn {
     font-size: 50px;
     position: absolute;
-    margin-top: -40px;
+    margin-top: -5px;
 }
 
 .SearchIcon {
@@ -9,15 +9,16 @@
     width: 50px;
     object-fit: fill;
     border-radius: 10px;
-    border: 1px solid rgb(165, 165, 165);
+    border: rgb(165, 165, 165) 2px solid;
     top: -5px;
 }
 
-@media (max-width: 310px) {
+@media (max-width: 370px) {
     .funcybtn {
         font-size: 25px;
         position: relative;
         margin: 0;
+        margin-top: 15px;
     }
 }
 
@@ -72,5 +73,15 @@ header {
 @media (max-width:1000px) {
     header {
         width: 100%;
+    }
+}
+
+
+@media (max-width: 300px) {
+    .Profilebtn{
+        position: absolute;
+        right: 1rem;
+        bottom: 50%;
+        transform: translateY(50%);
     }
 }

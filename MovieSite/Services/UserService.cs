@@ -23,6 +23,8 @@ namespace MovieSite.Services
 
             if (foundUser.Count == 0)
             {
+                user.UserWatchLaterList = new string[0];
+                user.UserWatchList = new string[0];
                 await Users.InsertOneAsync(user);
                 return user;
             }

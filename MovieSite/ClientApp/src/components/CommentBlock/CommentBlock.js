@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { TextField } from "@material-ui/core"
 import "./CommentBlock.css"
 import Comments from "./Comments/Comments";
+import Button from "reactstrap/lib/Button";
 
 const useFormField = (initialValue) => {
     const [value, setValue] = React.useState(initialValue);
@@ -103,10 +104,10 @@ function CommentBlock({ movieId }) {
                         multiline
                         rowsMax={4}
                         {...commentText.bind} />
-                    <button className="comment-add"
+                    <Button className="comment-add"
                         onClick={addComment}>
                         Add
-                    </button>
+                    </Button>
                 </div>
             )}
             <div className="comment-list-container">

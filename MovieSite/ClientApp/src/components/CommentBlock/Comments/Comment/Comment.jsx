@@ -6,6 +6,11 @@ function Comment({ comment, userId, updateList }) {
 
     const [userIcon, setUserIcon] = useState();
     const [userName, setUserName] = useState();
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        if (!user) setUser(JSON.parse(JSON.parse(localStorage.getItem('User'))));
+    }, [user])
 
     useEffect(() => {
         let xhr = new XMLHttpRequest();
@@ -14,12 +19,10 @@ function Comment({ comment, userId, updateList }) {
         xhr.onload = () => {
             if (xhr.status === 200) {
                 let responseUser = JSON.parse(xhr.responseText);
-                console.log(responseUser);
                 setUserIcon(responseUser.image ? responseUser.image : logo);
                 setUserName(responseUser.firstName + " " + responseUser.lastName);
             }
         };
-        console.log(xhr);
         xhr.send();
     }, [comment]);
 
@@ -34,7 +37,6 @@ function Comment({ comment, userId, updateList }) {
         };
         xhr.send(comment.commentId);
     }, [comment.commentId, updateList]);
-    console.log(comment);
     return (
         // <div className="comment">
         //     <img className="comment-user-icon" src={userIcon} style={{ margin: 0 }} />
@@ -57,7 +59,7 @@ function Comment({ comment, userId, updateList }) {
                 <tbody>
                     <tr className="tr1">
                         <td rowSpan="2" className="imageCell">
-                            <img className="comment-user-icon" src={userIcon} alt="User" style={{ margin: 0 }} />                    </td>
+                            <img className="comment-user-icon" src={userIcon} alt="Deleted User" style={{ margin: 0 }} />                    </td>
                         <td className="nameCell">
                             <div className="comment-user-name">
                                 {userName}
@@ -77,7 +79,7 @@ function Comment({ comment, userId, updateList }) {
                             </div>
                         </td>
                         <td className="commentText">
-                            {userId === comment.userId && (
+                            {(userId === comment.userId || user?.role) && (
                                 <div className="comment-remove" onClick={deleteCommentHandler}>&#128465;</div>
                             )}
                         </td>

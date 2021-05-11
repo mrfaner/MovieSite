@@ -23,10 +23,8 @@ namespace MovieSite.Models
         [BsonIgnoreIfNull]
         public bool Role { get; set; }
 
-        [BsonIgnoreIfNull]
         public string[] UserWatchLaterList { get; set; }
 
-        [BsonIgnoreIfNull]
         public string[] UserWatchList { get; set; }
     }
 }

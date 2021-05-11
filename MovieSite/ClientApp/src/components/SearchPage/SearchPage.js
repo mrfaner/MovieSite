@@ -122,7 +122,7 @@ export function SearchPage() {
                         name="categorys"
                         className="categorySelector"
                         inputProps={{ 'aria-label': 'categorys' }}
-                        style={{ width: "182px", border: "1px solid black", borderRadius: "5px" }}
+                        style={{background: "white", width: "182px", border: "1px solid black", borderRadius: "5px" }}
                     >
                         <option value=''>None</option>
                         {
@@ -144,7 +144,7 @@ export function SearchPage() {
                         name="sort"
                         className="categorySort"
                         inputProps={{ 'aria-label': 'sort' }}
-                        style={{ width: "182px", border: "1px solid black", borderRadius: "5px" }}
+                        style={{background: "white", width: "182px", border: "1px solid black", borderRadius: "5px" }}
 
                     >
                         <option value={1}>Name</option>

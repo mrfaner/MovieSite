@@ -7,6 +7,7 @@ import { MovieRedactor } from "./components/MovieRedactor/MovieRedactor"
 import { View } from "./components/View/View"
 import { Settings } from "./components/Settings/Settings"
 import { SearchPage } from "./components/SearchPage/SearchPage"
+import Background from "./components/Images/Backgr.jpg"
 import './custom.css'
 
 export default class App extends Component {
@@ -14,7 +15,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className="page">
+            <div className="page" style={{ backgroundImage: "url(" + Background + ")", backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat"}}>
                 <Layout>
                     <Route exact path='/' component={Home} />
                     <Route exact path='/Profile/' component={Profile} />

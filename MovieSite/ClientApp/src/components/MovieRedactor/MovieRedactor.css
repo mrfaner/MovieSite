@@ -74,6 +74,11 @@
     margin-right: 5px;
 }
 
+.MuiInputBase-root{
+    width: 182px;
+    border: 1px solid #767676;
+}
+
 .emptyErrorTitle {
     display: block;
     font-size: large;

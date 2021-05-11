@@ -8,7 +8,6 @@ import MovieCard from "./MovieCard";
 
 
  function MovieCardList({MovieList, getMovies}) {
-
      return (
              <div className="movieList">
                  {MovieList.map((movie, index) => {

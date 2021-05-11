@@ -128,6 +128,11 @@
     text-align: right;
 }
 
+.deletebtnView{
+    display: flex;
+    padding-left: 20px;
+}
+
 .TrailerBlock .video-responsive {
     width: 100%;
     height: auto;

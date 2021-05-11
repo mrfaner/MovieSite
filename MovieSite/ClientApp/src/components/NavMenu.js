@@ -29,17 +29,17 @@ export function NavMenu() {
 
   return (
     <header>
-      <Navbar className="he" light>
+      <Navbar className="he" light style={{flexWrap: "unset", gap: "100px", flexDirection: "row",  position: "relative", alignContent: "center"}}>
         {/*<Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>*/}
         {/*  <Container>*/}
         {/*<NavbarBrand tag={Link} to="/">BooMBooK</NavbarBrand>*/}
-        <NavbarBrand tag={Link} to="/">
+        <NavbarBrand tag={Link} to="/" style={{width: "220px", height: "75px", position: "relative"}}>
           <div className="funcybtn">
             MovieSite
               </div>
 
         </NavbarBrand>
-        <NavbarBrand tag={Link} to="/Search/">
+        <NavbarBrand tag={Link} to="/Search/" style={{position: "absolute", right: "4rem"}}>
           <img src={SearchIcon} alt="Search" className="SearchIcon" />
         </NavbarBrand>
 
@@ -50,7 +50,8 @@ export function NavMenu() {
           {
             !isLoggedIn &&
             (
-              <NavItem onClick={() => setIsActive(true)}>
+              <NavItem className="Profilebtn"
+               onClick={() => setIsActive(true)}>
                 <img src={UserIcon}
                   className="menuItemIcon center"
                   alt="UserIcon" />
@@ -64,7 +65,7 @@ export function NavMenu() {
           {
             isLoggedIn &&
             (
-              <NavItem>
+              <NavItem className="Profilebtn">
                 <div>
                   <img aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}
                     src={UserIcon}
