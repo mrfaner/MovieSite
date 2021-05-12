@@ -241,7 +241,7 @@ export function MovieRedactor() {
                             value={personName}
                             onChange={handleChange}
                             input={<Input />}
-                            style={{width: "182px", border:"1px solid #767676"}}
+                            style={{width: "182px", border:"1px solid #767676", background: "white"}}
 
                             renderValue={(selected) => selected.join(', ')}
                             MenuProps={MenuProps}

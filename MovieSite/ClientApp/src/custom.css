@@ -15,8 +15,7 @@ html, body, #root, .page {
 }
 
 header{
-  background: #f0f8ffd1;
-}
+  background: #e2e2e2f0;}
 
 .container {
   border: black 1px solid;
@@ -24,8 +23,7 @@ header{
   margin-top: 20px;
   margin-bottom: 30px;
   padding: 5px;
-  background: #f0f8ffd1;
-}
+  background: #e2e2e2f0;}
 
 
 .main {
