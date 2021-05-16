@@ -9,6 +9,8 @@ namespace MovieSite.Models
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public string Year { get; set; }
 
         [BsonIgnoreIfNull]
@@ -16,10 +18,15 @@ namespace MovieSite.Models
 
         public string Country { get; set; }
 
-        public string Categories { get; set; }
+
+        public string[] Categories { get; set; }
 
         public string Duration { get; set; }
 
         public string IMDBRating { get; set; }
+
+        [BsonIgnoreIfNull]
+        public string TrailerLink { get; set; }
+
     }
 }

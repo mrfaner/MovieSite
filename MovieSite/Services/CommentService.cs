@@ -46,5 +46,16 @@ namespace MovieSite.Services
 
             return comments;
         }
+
+        public async Task<Comment> UpdateComment(Comment comment)
+        {
+            return await Comments.FindOneAndReplaceAsync(comment.CommentId, comment);
+        }
+
+        public async Task DeleteComment(string commentId)
+        {
+            await Comments.DeleteOneAsync(x => x.CommentId == commentId);
+        }
     }
 }
+

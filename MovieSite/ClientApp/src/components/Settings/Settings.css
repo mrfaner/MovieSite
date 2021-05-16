@@ -1,0 +1,54 @@
+.settingsAvatar {
+    width: 300px;
+    height: 300px;
+    object-fit: fill;
+    border: black 1px solid;
+    border-radius: 5px;
+}
+
+.settingsAvatar:hover {
+    transform: scale(1.015);
+}
+
+.settingsBlock, .avatarSet, .PasswordSet, .NamesSet {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 10px;
+}
+
+.EmailSet {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-items: center;
+    justify-content: center;
+}
+
+.settingsBlock button {
+    width: 182px;
+    margin-top: 10px;
+}
+
+.fileInput {
+    width: 100%;
+}
+
+.NamesSet {
+    margin-bottom: 30px;
+}
+
+@media (max-width:300px) {
+    .settingsAvatar {
+        height: auto;
+        width: calc(100%);
+    }
+    .settingsBlock, .avatarSet, .PasswordSet, .NamesSet {
+        width: calc(100%);
+    }
+}

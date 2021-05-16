@@ -23,11 +23,18 @@ namespace MovieSite.Services
 
             if (foundUser.Count == 0)
             {
+                user.UserWatchLaterList = new string[0];
+                user.UserWatchList = new string[0];
                 await Users.InsertOneAsync(user);
                 return user;
             }
 
             return new User();
+        }
+
+        public async Task<User> GetUserById(string userId)
+        {
+            return await Users.Find(x => x.UserId == userId).FirstOrDefaultAsync();
         }
 
         public async Task<User> LogIn(string login, string password)
@@ -42,6 +49,77 @@ namespace MovieSite.Services
 
             return foundUser[0];
         }
+
+        public async Task<User> GetUserData(string userId)
+        {
+            List<User> foundUser = await Users.Find(x => x.UserId == userId).ToListAsync();
+
+            if (foundUser.Count == 0)
+            {
+                return new User();
+            }
+
+            return foundUser[0];
+        }
+
+        public async Task<User> ChangeUserDataArrayWatchLater(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(x => x.UserId, user.UserId);
+
+            var update = Builders<User>.Update.Set(x => x.UserId, user.UserId);
+
+            update = update.Set(x => x.UserWatchLaterList, user.UserWatchLaterList);
+
+            List<User> foundUser = await Users.Find(x => x.UserId == user.UserId).ToListAsync();
+
+                await Users.UpdateOneAsync(filter, update);
+                update = update.Set(x => x.UserWatchList, user.UserWatchList);
+                await Users.UpdateOneAsync(filter, update);
+            foundUser = await Users.Find(x => x.UserId == user.UserId).ToListAsync();
+
+            return foundUser[0];
+        }
+
+        public async Task<User> ChangeUserDataArrayWatch(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(x => x.UserId, user.UserId);
+
+            var update = Builders<User>.Update.Set(x => x.UserId, user.UserId);
+
+            update = update.Set(x => x.UserWatchList, user.UserWatchList);
+
+            await Users.UpdateOneAsync(filter, update);
+
+            List<User> foundUser = await Users.Find(x => x.UserId == user.UserId).ToListAsync();
+
+            if (foundUser.Count == 0)
+            {
+                return new User();
+            }
+
+            return foundUser[0];
+        }
+
+        public async Task<User> ChangeUserDataImage(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(x => x.UserId, user.UserId);
+
+            var update = Builders<User>.Update.Set(x => x.UserId, user.UserId);
+
+            update = update.Set(x => x.Image, user.Image);
+
+            await Users.UpdateOneAsync(filter, update);
+
+            List<User> foundUser = await Users.Find(x => x.UserId == user.UserId).ToListAsync();
+
+            if (foundUser.Count == 0)
+            {
+                return new User();
+            }
+
+            return foundUser[0];
+        }
+
 
         public async Task<User> ChangeUserData(string fieldName, string userId, string newData)
         {

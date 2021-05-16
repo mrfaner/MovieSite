@@ -1,0 +1,128 @@
+.comment-add {
+    margin-right: 20px;
+    margin-left: auto;
+    margin-top: 5px;
+    
+}
+
+.comment-list{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.MuiFormControl-root {
+    width: 100%;
+    height: auto;
+    border: 1px solid;
+    border-radius: 10px;
+    max-height: 400px;
+    /* display: block; */
+    margin: auto;
+    border: 1px solid black;
+}
+
+.new-comment-container {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+}
+
+.MuiInput-underline:before {
+    width: 0;
+    height: 0;
+}
+
+.MuiInput-underline:after {
+    width: 0;
+    height: 0;
+}
+
+.MuiInputBase-root {
+    width: auto;
+    border: none;
+}
+
+.comment-user-icon {
+    margin: 0px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #cecece;
+    border-radius: 10px;
+}
+
+.comment-data {
+    text-align: right;
+    width: 130px;
+}
+
+.table {
+    width: 100%;
+}
+
+.commentText {
+    width: 5px;
+    max-width: 20px;
+}
+
+.comment-list-container {
+    width: 100%;
+}
+
+.tr1 {
+    height: 5px;
+}
+
+.imageCell {
+    height: auto;
+    width: 100px;
+}
+
+@media (max-width:350px) {
+    .imageCell, .comment-user-icon {
+        height: auto;
+        width: 30px;
+    }
+    .comment-data {
+        width: auto;
+    }
+}
+
+.comment-user-name, .comment-data {
+    text-shadow: none;
+    font-style: italic;
+    font-size: 13px;
+    height: 24px;
+    margin-left: 5px;
+}
+
+.comment-remove {
+    width: 20px;
+    height: auto;
+    margin: 0;
+}
+
+.table th, .table td {
+    padding: 0;
+    border-top: none;
+}
+
+.text {
+    text-align: justify;
+    /* margin: auto; */
+    margin-left: 5px;
+    margin-right: 5px;
+    word-break: break-word;
+}
+
+.comment {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+

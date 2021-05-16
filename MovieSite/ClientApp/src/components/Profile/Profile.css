@@ -1,0 +1,63 @@
+﻿.heading {
+    width: max-content;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.profile-box {
+    overflow-y: auto;
+    min-width: 200px;
+    break-inside: avoid;
+    width: calc(100% - 10px);
+    transition: 0.3s;
+    overflow-x: hidden;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    margin: auto;
+    align-items: center;
+}
+
+.btnNonActive, .btnActive {
+    max-width: 50%;
+    min-width: 130px;
+    white-space: nowrap;
+}
+
+.buttonblock {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.names {
+    font-size: 40px;
+}
+
+.profile-box button {
+    width: 150px;
+    height: 35px;
+}
+
+.avatar {
+    height: 300px;
+    width: 300px;
+    border: 1px solid #858585;
+}
+
+.your-movies {
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (max-width:301px) {
+    .avatar {
+        width: 100%;
+        height: auto;
+    }
+}

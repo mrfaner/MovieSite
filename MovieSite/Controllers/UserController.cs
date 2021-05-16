@@ -23,6 +23,12 @@ namespace MovieSite.Controllers
             return await userService.Create(user);
         }
 
+        [HttpGet("GetUserById/{userId}")]
+        public async Task<User> GetUserById(string userId)
+        {
+            return await userService.GetUserById(userId);
+        }
+
         [HttpGet("{login},{password}")]
         public async Task<User> GetUser(string login, string password)
         {
@@ -40,6 +46,30 @@ namespace MovieSite.Controllers
         {
             return await userService.ChangeUserData(fieldName, userId, newData);
         }
+
+        [HttpPost("ChangeUserData/Image/")]
+        public async Task<User> ChangeUserDataImage(User user)
+        {
+            return await userService.ChangeUserDataImage(user);
+        }
+
+        [HttpPost("ChangeUserData/ArrayLater/")]
+        public async Task<User> ChangeUserDataArrays(User user)
+        {
+            return await userService.ChangeUserDataArrayWatchLater(user);
+        }
+
+        [HttpPost("ChangeUserData/Array/")]
+        public async Task<User> ChangeUserDataArrayWatch(User user)
+        {
+            return await userService.ChangeUserDataArrayWatch(user);
+        }
+        [HttpPost("GetUserData/{userId}")]
+        public async Task<User> GetUserData(string userId)
+        {
+            return await userService.GetUserData(userId);
+        }
+
     }
 
 }

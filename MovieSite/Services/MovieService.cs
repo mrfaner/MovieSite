@@ -44,6 +44,32 @@ namespace MovieSite.Services
             return await Movies.Find(x => x.MovieId == movieId).FirstOrDefaultAsync();
         }
 
+        public async Task<List<Movie>> GetWatchLaterMovieListByUserId(string userId)
+        {
+            IMongoCollection<User> Users = DataBaseService.GetMongoCollection<User>("Users");
+            var foundUser = await Users.Find(x => x.UserId == userId).ToListAsync();
+
+            List<Movie> list = new List<Movie>();
+            foreach (var arrayItem in foundUser[0].UserWatchLaterList)
+            {
+                list.Add(await GetMovieByMovieId(arrayItem));
+            }
+            return list;
+        }
+
+        public async Task<List<Movie>> GetWatchMovieListByUserId(string userId)
+        {
+            IMongoCollection<User> Users = DataBaseService.GetMongoCollection<User>("Users");
+            var foundUser = await Users.Find(x => x.UserId == userId).ToListAsync();
+
+            List<Movie> list = new List<Movie>();
+            foreach (var arrayItem in foundUser[0].UserWatchList)
+            {
+                list.Add(await GetMovieByMovieId(arrayItem));
+            }
+            return list;
+        }
+
         public async Task<List<Movie>> GetMovies()
         {
             return await Movies.Find(x => true).ToListAsync();
@@ -56,15 +82,64 @@ namespace MovieSite.Services
 
             return await Movies.Find(x => true).Skip(first).Limit(second - first).ToListAsync();
         }
+        public async Task<List<Movie>> GetMoviesSearch(string title, string category, string sort)
+        {
+            FilterDefinition<Movie> filter = null;
+            if (!title.Equals("0"))
+            {
+                Regex regex = new Regex(@$"[\s\S]*{title}[\s\S]*", RegexOptions.IgnoreCase);
+                filter = Builders<Movie>.Filter.Regex(x => x.Name, new BsonRegularExpression(regex));
+                if (!category.Equals("0"))
+                {
+                    filter &= Builders<Movie>.Filter.AnyEq(x => x.Categories, category);
+                }
+            }
+            else if (!category.Equals("0"))
+            {
+                filter = Builders<Movie>.Filter.AnyEq(x => x.Categories, category);
+            }
+            try
+            {
+                switch (sort)
+                {
+                    default:
+                        {
+                            var TestSort1 = Builders<Movie>.Sort.Ascending("Name");
+                            return await Movies.Find(filter).Sort(TestSort1).ToListAsync();
+                        }
+                    case "2":
+                        {
+                            var TestSort1 = Builders<Movie>.Sort.Descending("Name");
+                            return await Movies.Find(filter).Sort(TestSort1).ToListAsync();
+                        }
+                    case "3":
+                        {
+                            var TestSort1 = Builders<Movie>.Sort.Ascending("IMDBRating");
+                            return await Movies.Find(filter).Sort(TestSort1).ToListAsync();
+                        }
+                    case "4":
+                        {   
+                            var TestSort1 = Builders<Movie>.Sort.Descending("IMDBRating");
+                            return await Movies.Find(filter).Sort(TestSort1).ToListAsync();
+                        }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public async Task UpdateMovie(Movie movie)
         {
             await Movies.ReplaceOneAsync(x => x.MovieId == movie.MovieId, movie);
         }
 
-        public async Task DeleteMovie(string id)
+        public async Task<string> DeleteMovie(string id)
         {
-            await Movies.DeleteOneAsync(x => x.MovieId == id);
+            var filter = Builders<Movie>.Filter.Where(x => x.MovieId == id);
+            await Movies.DeleteOneAsync(filter);
+            return "ok";
         }
     }
 }

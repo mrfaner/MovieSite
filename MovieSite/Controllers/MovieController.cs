@@ -29,10 +29,34 @@ namespace MovieSite.Controllers
             return await movieService.GetMovies();
         }
 
+        [HttpGet("GetWatchLaterList/{userId}")]
+        public async Task<List<Movie>> GetWatchLaterMovieListByUserId(string userId)
+        {
+            return await movieService.GetWatchLaterMovieListByUserId(userId);
+        }
+
+        [HttpPost("DeleteMovie/{movieId}")]
+        public async Task<string> DeleteMovie(string movieId)
+        {
+            return await movieService.DeleteMovie(movieId);
+        }
+
+        [HttpGet("GetWatchList/{userId}")]
+        public async Task<List<Movie>> GetWatchMovieListByUserId(string userId)
+        {
+            return await movieService.GetWatchMovieListByUserId(userId);
+        }
+
         [HttpGet("{firstNumber},{secondNumber}")]
         public async Task<List<Movie>> GetMovies(string firstNumber, string secondNumber)
         {
             return await movieService.GetMovies(firstNumber, secondNumber);
+        }
+
+        [HttpGet("GetMovieSearch/{title},{category}/{sort}")]
+        public async Task<List<Movie>> GetMoviesSearch(string title, string category, string sort)
+        {
+            return await movieService.GetMoviesSearch(title, category, sort);
         }
 
         [HttpGet("GetMovieByMovieId/{movieId}")]

@@ -1,31 +1,27 @@
 import React from "react";
 import "./MovieCard.css";
 import { Button } from "reactstrap";
-import { useHistory } from "react-router-dom";
+import noimage from "./../MovieRedactor/no-image.png";
+import { NavbarBrand } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
- function MovieCard(props){
 
-     console.log(props.movie);
-     const history = useHistory();
+function MovieCard(props) {
 
-     return(
-         <div className="box text-center">
-             <div className="cardTitle">{props.movie.title}</div>
-             <div className="cardText">{props.movie.description}</div>
-             <p>
-                <Button onClick={() => { history.push(`/MoviePage/${props.movie.movieId}`);}}>Читати...</Button>
-             </p>
-         </div>
-         // <Card className="movieBody">
-         //     <CardTitle>
-         //         <p>{props.index}</p>
-         //         {props.movie.title}
-         //     </CardTitle>
-         //    <CardBody>
-         //        {props.movie.text}
-         //    </CardBody>
-         // </Card>
-     );
+
+
+    return (
+        <div className="view">
+            <img className="img" src={(props.movie.image.includes("data:image")) ? props.movie.image : noimage} alt="Film pos" />
+            <div className="mask">
+                <h2>{props.movie.name}</h2>
+                <p className="cardText">{props.movie.description}</p>
+                <NavbarBrand tag={Link} to={"/MoviePage/" + props.movie.movieId}>
+                    <Button>ReadMore...</Button>
+                </NavbarBrand>
+            </div>
+        </div>
+    );
 
 }
 
