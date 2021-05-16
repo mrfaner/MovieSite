@@ -221,7 +221,7 @@ export function Settings() {
                         }
                     })()
                 }
-                <input className="fileInput" type="file" onChange={event => imageSelect(event)} />
+                <input className="fileInput" type="file" onChange={event => imageSelect(event)} accept="image/*" />
                 <Button onClick={() => {
                     handleSubmit("Avatar")
                 }}>

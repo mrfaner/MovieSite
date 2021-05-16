@@ -190,6 +190,7 @@ export function MovieRedactor() {
                     <input className="imageInput"
                         type="file"
                         onChange={event => imageSelect(event)}
+                        accept="image/*"
                     />
                 </span>
                 <div className="otherSetEditor">
